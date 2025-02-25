@@ -8,8 +8,9 @@ import SignOutConfig from '../main/sign-out/SignOutConfig';
 import Error404Page from '../main/404/Error404Page';
 import ExampleConfig from '../main/example/ExampleConfig';
 import AboutConfig from '../main/about/AboutConfig';
+import NewsConfig from '../main/news/NewsConfig';
 
-const routeConfigs = [AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
+const routeConfigs = [NewsConfig ,AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(routeConfigs, settingsConfig.defaultAuth),
@@ -29,11 +30,7 @@ const routes = [
   {
     path: '*',
     element: <Navigate to="404" />,
-  },
-  {
-    path: '/example/about',
-    element: <Navigate to="404" />,
-  },
+  }
 ];
 
 export default routes;
