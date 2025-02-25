@@ -23,7 +23,7 @@ const AdminShowSingleData = ({ getSingleData, data }) => {
             const res = await getSingleData(newsId);
             if (res.success) {
                 setSingleData(res.data)
-                console.log(res.data);
+                // console.log(res.data);
             } else {
                 setSingleData(null)
             }

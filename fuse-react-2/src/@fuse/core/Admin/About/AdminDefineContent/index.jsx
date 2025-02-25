@@ -40,7 +40,6 @@ const AdminDefineContent = ({ data, setReload }) => {
       .then((res) => {
         setReload((prev) => prev + 1);
 
-        console.log(res.data);
         if (res.data.success && res.status === 200) {
           toast.success('Content has been updated successfully', {
             position: "top-right",

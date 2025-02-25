@@ -21,7 +21,7 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
     const formik = useFormikForm(initialValues, validation, onSubmit);
 
     function onSubmit(values) {
-        console.log(values);
+        // console.log(values);
         let formData = {}
         if (section === "news") {
             formData = {

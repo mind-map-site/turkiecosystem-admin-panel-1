@@ -47,7 +47,7 @@ function createData(name, code, population, size) {
 }
 
 export default function AdminShowTableData({setReload, data}) {
-    console.log("news: ", data)
+    // console.log("news: ", data)
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

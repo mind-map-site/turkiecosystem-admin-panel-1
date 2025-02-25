@@ -35,7 +35,7 @@ const AdminPageStructure = ({
     description,
     actions
 }) => {
-    console.log(getContentAPI, description, actions)
+    // console.log(getContentAPI, description, actions)
     // const { toast } = useToast();
     const [reload, setReload] = useState(0);
     const [content, setContent] = useState(null);
@@ -58,7 +58,7 @@ const AdminPageStructure = ({
         getAllContent();
     }, [reload]);
 
-    console.log(content);
+    // console.log(content);
     const handleChange = (_, newValue) => {
         setSelectedAction(newValue);
     };
@@ -66,7 +66,7 @@ const AdminPageStructure = ({
     const SelectedComponent = componentMap[selectedAction];
     const selectedActionObject = actions.find(action => action.value == selectedAction);
 
-    console.log(selectedActionObject)
+    // console.log(selectedActionObject)
     return (
         <div>
             <p className="mb-2">{description}</p>
