@@ -33,14 +33,21 @@ export const useNewsFormValidation = () => {
     titleAz: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Title is required'),
-    descriptionEn: string()
+    descEn: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Description is required'),
-    descriptionRu: string()
+    descRu: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Description is required'),
-    descriptionAz: string()
+    descAz: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Description is required'),
   })
 }
+
+export const newsFormInitialValues = { titleEn: '', titleRu: '', titleAz: '', descEn: '', descRu: '', descAz: '' }
+
+export const newsCreateFormInputs = [
+  { title: "Title", description:"You can update or create title in three different languages (EN, AZ, RU).", type:"text", isLang:true, id:"title", name:"title"},
+  { title: "Description", description:"You can update or create description in three different languages (EN, AZ, RU).", type:"text", isLang:true, id:"desc", name:"desc"}
+]
