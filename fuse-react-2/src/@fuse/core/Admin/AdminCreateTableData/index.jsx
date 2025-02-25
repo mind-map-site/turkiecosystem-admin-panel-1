@@ -52,7 +52,7 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                         theme: "light",
                     });
                 } else {
-                    console.log(res);
+                    // console.log(res);
                     toast.error('Something went wrong');
                 }
             })
@@ -94,9 +94,9 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     multiline
                                                     rows={6}
                                                     fullWidth
-                                                    id={id + "En"}
-                                                    name={name + "En"}
-                                                    value={formik.values[name + "En"]}
+                                                    id={`${id}En`}
+                                                    name={`${name}En`}
+                                                    value={formik.values[`${name}En`]}
                                                     onChange={formik.handleChange}
                                                     // error={formik.touched[name] && Boolean(formik.errors[name])}
                                                     // helperText={formik.touched[name] && formik.errors[name]}
@@ -110,12 +110,12 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                             </AccordionSummary>
                                             <AccordionDetails>
                                                 <TextField
-                                                    id={id + 'Ru'}
                                                     fullWidth
                                                     multiline
                                                     rows={6}
-                                                    name={name + "Ru"}
-                                                    value={formik.values[name + "Ru"]}
+                                                    id={`${id}Ru`}
+                                                    name={`${name}Ru`}
+                                                    value={formik.values[`${name}Ru`]}
                                                     onChange={formik.handleChange}
                                                     // error={formik.touched[name] && Boolean(formik.errors[name])}
                                                     // helperText={formik.touched[name] && formik.errors[name]}
@@ -132,9 +132,9 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     fullWidth
                                                     multiline
                                                     rows={6}
-                                                    id={id + "Az"}
-                                                    name={name + "Az"}
-                                                    value={formik.values[name + "Az"]}
+                                                    id={`${id}Az`}
+                                                    name={`${name}Az`}
+                                                    value={formik.values[`${name}Az`]}
                                                     onChange={formik.handleChange}
                                                     // error={formik.touched[name] && Boolean(formik.errors[name])}
                                                     // helperText={formik.touched[name] && formik.errors[name]}

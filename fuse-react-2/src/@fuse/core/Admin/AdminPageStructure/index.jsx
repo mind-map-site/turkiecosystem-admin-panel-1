@@ -64,7 +64,7 @@ const AdminPageStructure = ({
     };
 
     const SelectedComponent = componentMap[selectedAction];
-    const selectedActionObject = actions.find(action => action.value == selectedAction);
+    const selectedActionObject = actions.find(action => action.value === selectedAction);
 
     // console.log(selectedActionObject)
     return (

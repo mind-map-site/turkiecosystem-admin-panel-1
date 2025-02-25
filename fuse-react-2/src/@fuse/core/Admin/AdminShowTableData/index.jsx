@@ -41,10 +41,6 @@ const columns = [
     },
 ];
 
-function createData(name, code, population, size) {
-    const density = population / size;
-    return { name, code, population, size, density };
-}
 
 export default function AdminShowTableData({setReload, data}) {
     // console.log("news: ", data)

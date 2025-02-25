@@ -12,9 +12,9 @@ const AdminDeleteTableData = ({deleteData, setReload }) => {
         }
         try {
             const res = await deleteData(newsId);
-            if (res.status == 200) {
+            if (res.status === 200) {
                 setError("")
-                setReload((prev) => ++prev);
+                setReload((prev) => ++prev);  // eslint-disable-next-line no-plusplus
                 toast.success("News is deleted successfully");
             } else {
                 toast.error("failed to delete news Id");
