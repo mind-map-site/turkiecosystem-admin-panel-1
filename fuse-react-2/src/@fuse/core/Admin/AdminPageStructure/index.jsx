@@ -13,12 +13,16 @@ import AdminDeleteImage from "../AdminDeleteImage";
 import AdminUpdateData from "../AdminUpdateData";
 import AdminShowTableData from "../AdminShowTableData";
 import AdminShowSingleData from "../AdminShowSingleData";
+import AdminCreateTableData from "../AdminCreateTableData";
+import AdminDeleteTableData from "../AdminDeleteTableData";
 
 
 const componentMap = {
     "ShowAbout": AdminShowContent,
     "ShowNews": AdminShowTableData,
-    "ShowSingleNews":AdminShowSingleData,
+    "CreateNews": AdminCreateTableData,
+    "DeleteNews": AdminDeleteTableData,
+    "ShowSingleNews": AdminShowSingleData,
     "DefineUpdateAbout": AdminDefineContent,
     "UpdateNews": AdminUpdateData,
     "AddImg": AdminAddImage,
@@ -31,7 +35,7 @@ const AdminPageStructure = ({
     description,
     actions
 }) => {
-    console.log(getContentAPI, description,actions)
+    console.log(getContentAPI, description, actions)
     // const { toast } = useToast();
     const [reload, setReload] = useState(0);
     const [content, setContent] = useState(null);
@@ -79,7 +83,7 @@ const AdminPageStructure = ({
                     ))}
                 </Tabs>
             </Box>
-            <ToastContainer position="bottom-left" className="absolute bottom-0 right-20 h-24" />
+          
 
             <Box sx={{ mt: 2 }}>
                 {content ? (
