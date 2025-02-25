@@ -61,6 +61,9 @@
         "import/no-extraneous-dependencies": ["warn", {"devDependencies": true}],
         "no-unused-vars": "off",
         "no-console": "off",
+        "no-plusplus": "off",
+        "react/jsx-curly-brace-presence": "off",
+        "no-nested-ternary": "off",
         "no-use-before-define": "off",
         "no-underscore-dangle": "off",
         "no-param-reassign": "off", // mutating redux state in redux-toolkit.
