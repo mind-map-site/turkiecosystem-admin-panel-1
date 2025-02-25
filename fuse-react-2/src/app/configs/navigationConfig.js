@@ -22,7 +22,15 @@ const navigationConfig = [
     translate: 'ABOUT', // Make sure to add this in the translation files
     type: 'item',
     icon: 'heroicons-outline:information-circle', // Appropriate icon for the About section
-    url: '/example/about', // New URL pointing to about page
+    url: '/dashboard/about', // New URL pointing to about page
+  },
+  {
+    id: 'news-component', 
+    title: 'News',
+    translate: 'NEWS',
+    type: 'item',
+    icon: 'heroicons-outline:document-text',
+    url: '/dashboard/news'
   },
 ];
 
