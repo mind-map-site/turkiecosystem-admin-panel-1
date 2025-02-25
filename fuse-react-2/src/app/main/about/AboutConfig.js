@@ -17,7 +17,7 @@ const AboutConfig = {
   },
   routes: [
     {
-      path: '/example/about',
+      path: '/dashboard/about',
       element: <AboutPage />,
     },
   ],
