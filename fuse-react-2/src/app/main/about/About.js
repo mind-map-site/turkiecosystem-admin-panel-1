@@ -2,7 +2,8 @@
 import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import FusePageSimple from "@fuse/core/FusePageSimple";
-import AdminPageStructure from "@fuse/core/About/AdminPageStructure";
+import { deleteAboutImage, getAboutContent, sendAboutImage } from "src/@mock-api/api/about-api";
+import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-header": {
@@ -29,7 +30,14 @@ function AboutPage(props) {
             }
             content={
                 <div className="p-24">
-                    <AdminPageStructure/>
+                    <AdminPageStructure getContentAPI={getAboutContent} description={"Choose an action to perform on the About Page."} actions={
+                        [
+                            { label: "Show About Data", value: "ShowAbout" },
+                            { label: "Define or Update Content", value: "DefineUpdateAbout" },
+                            { label: "Add Image", value: "AddImg", props: { addImage: sendAboutImage } },
+                            { label: "Delete Image", value: "DeleteImg", props: { deleteImage:deleteAboutImage} }
+                        ]
+                    } />
                 </div>
             }
             scroll="content"
