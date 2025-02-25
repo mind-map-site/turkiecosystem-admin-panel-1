@@ -34,12 +34,11 @@ export async function sendNewsImage(id, data) {
 }
 
 export async function deleteNewsImage(id, publicId) {
-    console.log(id, publicId)
     const res = await axiosInstance.delete(`/news/${id}/image/${publicId}`);
     return res;
 }
 
-export async function deleteNewsContent(id, publicId) {
+export async function deleteNewsContent(id) {
     const res = await axiosInstance.delete(`/news/${id}`);
     return res;
 }
