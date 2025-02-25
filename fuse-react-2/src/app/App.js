@@ -15,6 +15,7 @@ import FuseAuthorization from '@fuse/core/FuseAuthorization';
 import settingsConfig from 'app/configs/settingsConfig';
 import withAppProviders from './withAppProviders';
 import { AuthProvider } from './auth/AuthContext';
+import { ToastContainer } from 'react-toastify';
 
 // import axios from 'axios';
 /**
@@ -47,6 +48,7 @@ const App = () => {
       <FuseTheme theme={mainTheme} direction={langDirection}>
         <AuthProvider>
           <BrowserRouter>
+            <ToastContainer position="top-left"/>
             <FuseAuthorization
               userRole={user.role}
               loginRedirectUrl={settingsConfig.loginRedirectUrl}
