@@ -45,7 +45,7 @@ function SignInPage() {
 
   useEffect(() => {
     setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
-    setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
+    setValue('password', '@#admin@#!@', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
 
   function onSubmit({ email, password }) {
