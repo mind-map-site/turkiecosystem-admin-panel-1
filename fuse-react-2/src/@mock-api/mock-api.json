@@ -32587,12 +32587,12 @@
           {
             "uuid": "XgbuVEXBU5gtSKdbQRP1Zbbby1i1",
             "from": "custom-db",
-            "password": "admin",
+            "password": "@#admin@#!@",
             "role": "admin",
             "data": {
               "displayName": "Anar Gasimov",
               "photoURL": "",
-              "email": "",
+              "email": "admin@fusetheme.com",
               "settings": {
                 "layout": {},
                 "theme": {}
