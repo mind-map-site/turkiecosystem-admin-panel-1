@@ -25,7 +25,7 @@ const AdminDeleteImage = ({ id, setReload, deleteImage }) => {
         setIds('');
       }
     } catch {
-      toast('Failed to delete image. There was a problem with your request.');
+      toast.error('Failed to delete image. There was a problem with your request.');
       setIds('');
     }
   };
