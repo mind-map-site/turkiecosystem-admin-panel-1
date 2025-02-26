@@ -16,11 +16,7 @@ export async function sendNewsContent(data) {
 }
 
 export async function updateNewsContent(id, data) {
-    const res = await axiosInstance.put(`/news/${id}`, data, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        }
-    });
+    const res = await axiosInstance.put(`/news/${id}`, data, );
     return res;
 }
 
