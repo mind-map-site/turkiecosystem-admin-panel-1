@@ -5,6 +5,7 @@ import FusePageSimple from "@fuse/core/FusePageSimple";
 import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
 import { deleteNewsContent, deleteNewsImage, getNewsContent, getSingleNewsById, sendNewsContent, sendNewsImage, updateNewsContent } from "src/@mock-api/api/news-api";
 import { newsCreateFormInputs, newsFormInitialValues, useNewsFormValidation } from "src/data/formikFieldData";
+import { useValidation } from "@mui/x-date-pickers/internals";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-header": {
@@ -35,7 +36,7 @@ function NewsPage(props) {
                         [
                             { label: "Show News", value: "ShowNews", props:{getAllData:getNewsContent } },
                             { label: "Show Single News", value: "ShowSingleNews", props: { getSingleData: getSingleNewsById } },
-                            { label: "Update News", value: "UpdateNews", props:{updateData: updateNewsContent} },
+                            { label: "Update News", value: "UpdateNews", props: { updateData: updateNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "news"} },
                             { label: "Create News", value: "CreateNews", props: { createData: sendNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section:"news" } },
                             { label: "Delete News", value: "DeleteNews", props:{deleteData: deleteNewsContent}},
                             { label: "Add Image", value: "AddImg", props:{ addImage:sendNewsImage } },
