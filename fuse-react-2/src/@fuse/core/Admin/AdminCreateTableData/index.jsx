@@ -25,9 +25,9 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
         let formData = {}
         if (section === "news") {
             formData = {
-                'description.en': values.descEn,
-                'description.az': values.descAz,
-                'description.ru': values.descRu,
+                'description.en': values.descriptionEn,
+                'description.az': values.descriptionAz,
+                'description.ru': values.descriptionRu,
                 'title.en': values.titleEn,
                 'title.az': values.titleAz,
                 'title.ru': values.titleRu,
