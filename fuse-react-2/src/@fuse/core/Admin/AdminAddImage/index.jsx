@@ -3,13 +3,15 @@ import { Button, Card, CardContent, CardHeader, CardActions, Typography, TextFie
 import { sendAboutImage } from 'src/@mock-api/api/about-api';
 import { toast } from 'react-toastify';
 
-const AdminAddImage = ({ id, setReload, image, addImage }) => {
+const AdminAddImage = ({ id, setReload, image, addImage, section }) => {
   const [file, setFile] = useState(null);
   const [value, setValue] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files ? e.target.files[0] : null;
     setFile(selectedFile);
+    setImageUrl(URL.createObjectURL(selectedFile));
   };
 
   const handleChange = (e) => {
@@ -49,7 +51,7 @@ const AdminAddImage = ({ id, setReload, image, addImage }) => {
           {
             !id &&
             <>
-              <Typography variant="body2">Enter Image Id</Typography>
+              <Typography variant="body2">Enter {section} Id </Typography>
               <TextField
                 onChange={handleChange}
                 value={value}
@@ -69,8 +71,8 @@ const AdminAddImage = ({ id, setReload, image, addImage }) => {
         </CardContent>
         <CardContent className="space-y-2">
           <Typography variant="body2">Your Current Image</Typography>
-          {image ? (
-            <img src={image.href.url} alt="about" />
+          {file ? (
+            <img src={imageUrl} alt="Selected" style={{width:"200px", height:"auto"}} />
           ) : (
             <Typography variant="body2">There is no image</Typography>
           )}
