@@ -9,8 +9,12 @@ import Error404Page from '../main/404/Error404Page';
 import ExampleConfig from '../main/example/ExampleConfig';
 import AboutConfig from '../main/about/AboutConfig';
 import NewsConfig from '../main/news/NewsConfig';
+import IncentivesConfig from '../main/incentives/IncentivesConfig';
+import EventsConfig from '../main/events/EventsConfig';
+import InitiativesConfig from '../main/initiatives/InitiativesConfig';
 
-const routeConfigs = [NewsConfig ,AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
+
+const routeConfigs = [InitiativesConfig, EventsConfig, IncentivesConfig, NewsConfig, AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(routeConfigs, settingsConfig.defaultAuth),
