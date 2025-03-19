@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import FusePageSimple from "@fuse/core/FusePageSimple";
 import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
-import { deleteInitiativeContent, deleteInitiativeImage, getInitiativeContent, getSingleInitiativeById, sendInitiativeImage, updateInitiativeContent } from "src/@mock-api/api/initiative-api";
+import { deleteInitiativeContent, deleteInitiativeImage, getInitiativeContent, getSingleInitiativeById, sendInitiativeContent, sendInitiativeImage, updateInitiativeContent } from "src/@mock-api/api/initiative-api";
 import { newsCreateFormInputs, newsFormInitialValues, useNewsFormValidation } from "src/data/formikFieldData";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({

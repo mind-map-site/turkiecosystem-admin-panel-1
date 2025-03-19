@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import FusePageSimple from "@fuse/core/FusePageSimple";
 import { deleteEventsContent, deleteEventsImage, getEventsContent, getSingleEventsById, sendEventsContent, sendEventsImage, updateEventsContent } from "src/@mock-api/api/events-api";
 import { newsCreateFormInputs, newsFormInitialValues, useNewsFormValidation } from "src/data/formikFieldData";
+import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-header": {
