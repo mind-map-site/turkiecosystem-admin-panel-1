@@ -62,10 +62,11 @@ const AdminUpdateData = ({
 
     try {
       updateData(newsId, formattedData);
-      setReload((prev) => prev + 1);
       toast.success(`${section} has been updated successfully`);
     } catch (error) {
       toast.error(`${section} has failed to update`);
+    } finally {
+      setReload((prev) => prev + 1);
     }
   }
 
@@ -77,7 +78,7 @@ const AdminUpdateData = ({
 
   return (
     <div>
-      {section === "news" && (
+      {(section !== "ecosystem"  )&& (
         <Box my={2}>
           You will create just title and description, image can be updated with another tab.
         </Box>
