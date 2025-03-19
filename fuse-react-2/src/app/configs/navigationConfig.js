@@ -25,12 +25,36 @@ const navigationConfig = [
     url: '/dashboard/about', // New URL pointing to about page
   },
   {
-    id: 'news-component', 
+    id: 'news-component',
     title: 'News',
     translate: 'NEWS',
     type: 'item',
     icon: 'heroicons-outline:document-text',
     url: '/dashboard/news'
+  },
+  {
+    id: 'incentives-component',
+    title: 'Incentives',
+    translate: 'INCENTIVES',
+    type: 'item',
+    icon: 'heroicons-outline:document-text',
+    url: '/dashboard/incentives'
+  },
+  {
+    id: 'events-component',
+    title: 'Events',
+    translate: 'EVENTS',
+    type: 'item',
+    icon: 'heroicons-outline:document-text',
+    url: '/dashboard/events'
+  },
+  {
+    id: 'initiatives-component',
+    title: 'Initiatives',
+    translate: 'INITIATIVES',
+    type: 'item',
+    icon: 'heroicons-outline:document-text',
+    url: '/dashboard/initiatives'
   },
 ];
 
