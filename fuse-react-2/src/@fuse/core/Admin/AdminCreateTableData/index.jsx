@@ -23,7 +23,7 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
     function onSubmit(values) {
         // console.log(values);
         let formData = {}
-        if (section === "news") {
+        if (section !== "ecosystem" ) {
             formData = {
                 'description.en': values.descriptionEn,
                 'description.az': values.descriptionAz,
@@ -31,10 +31,12 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                 'title.en': values.titleEn,
                 'title.az': values.titleAz,
                 'title.ru': values.titleRu,
-                'content.en': "This is unused content",
-                'content.az': "This is unused content",
-                'content.ru': "This is unused content"
             };
+            if (section === "news") {
+                formData['content.en'] = "This is unused content";
+                formData['content.az'] = "This is unused content";
+                formData['content.ru'] = "This is unused content";
+            }
         }
 
         createData(formData)
@@ -64,7 +66,7 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
 
     return (
         <div>
-            {section === "news" &&
+            {section !== "ecosystem"  &&
                 <Box my={2}>
                     You will create just title and description, image will be add with another tab.
                 </Box>
