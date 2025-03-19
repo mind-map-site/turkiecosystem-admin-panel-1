@@ -7,6 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Box, IconButton, Typography } from '@mui/material';
+import { ContentCopyOutlined } from '@mui/icons-material';
+import copyToClipboard from '@fuse/utils/copyContent';
 
 const columns = [
     { id: 'id', label: 'Id', minWidth: 170 },
@@ -41,8 +44,7 @@ const columns = [
     },
 ];
 
-
-export default function AdminShowTableData({setReload, data}) {
+export default function AdminShowTableData({ setReload, data }) {
     // console.log("news: ", data)
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -58,15 +60,15 @@ export default function AdminShowTableData({setReload, data}) {
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
+            <TableContainer>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
                                     key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth}}
+                                    // align="center"
+                                    style={{ minWidth: column.minWidth }}
                                 >
                                     {column.label}
                                 </TableCell>
@@ -82,11 +84,34 @@ export default function AdminShowTableData({setReload, data}) {
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {/* Directly access title.en and description.en */}
-                                                    {column.id === 'title' || column.id === 'description' ? row[column.id]?.en :
-                                                        column.id === "image" ? `publicId:${row[column.id]?.href?.publicId},  url:${row[column.id]?.href?.url} `: 
-                                                            value}
+                                                <TableCell key={column.id} align="center">
+                                                    {column.id === 'title' || column.id === 'description' ?
+                                                        <Box>
+                                                            <Typography fontWeight={600}>en:</Typography>
+                                                            <Typography>{row[column.id]?.en} </Typography>
+                                                            <Typography fontWeight={600}>ru:</Typography>
+                                                            <Typography>{row[column.id]?.ru}</Typography>
+                                                            <Typography fontWeight={600}>az:</Typography>
+                                                            <Typography>{row[column.id]?.az}</Typography>
+                                                        </Box>
+                                                        :
+                                                        column.id === "image" ?
+
+                                                            <Box>
+                                                                <Typography fontWeight={600}>publicId:</Typography>
+                                                                <Typography>{row[column.id]?.href?.publicId} {row[column.id]?.href?.publicId &&
+                                                                    <IconButton onClick={() => copyToClipboard(row[column.id]?.href?.publicId)}><ContentCopyOutlined sx={{ fontSize: 16 }} /></IconButton>
+                                                                }</Typography>
+                                                                <Typography fontWeight={600}>url:</Typography>
+                                                                <Typography>{row[column.id]?.href?.url} </Typography>
+                                                                <Typography fontWeight={600}>image:</Typography>
+                                                                {row[column.id]?.href?.url && <img style={{ width: "200px", height: "auto", display: "block", marginInline: "auto" }} src={row[column.id]?.href?.url} alt="current" />}
+
+                                                            </Box>
+                                                            : column.id === "id" ?
+                                                                <Typography >{value} <IconButton onClick={() => copyToClipboard(value)}><ContentCopyOutlined sx={{ fontSize: 16 }} /></IconButton></Typography>
+                                                                : value
+                                                    }
                                                 </TableCell>
                                             );
                                         })}
