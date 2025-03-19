@@ -39,7 +39,7 @@ function NewsPage(props) {
                             { label: "Update News", value: "UpdateNews", props: { updateData: updateNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "news"} },
                             { label: "Create News", value: "CreateNews", props: { createData: sendNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section:"news" } },
                             { label: "Delete News", value: "DeleteNews", props:{deleteData: deleteNewsContent}},
-                            { label: "Add Image", value: "AddImg", props:{ addImage:sendNewsImage } },
+                            { label: "Add Image", value: "AddImg", props:{ addImage:sendNewsImage, section:"news" } },
                             { label: "Delete Image", value: "DeleteImg", props: {deleteImage:deleteNewsImage} }
                         ]
                     } />
