@@ -12,9 +12,10 @@ import NewsConfig from '../main/news/NewsConfig';
 import IncentivesConfig from '../main/incentives/IncentivesConfig';
 import EventsConfig from '../main/events/EventsConfig';
 import InitiativesConfig from '../main/initiatives/InitiativesConfig';
+import EcosystemConfig from '../main/ecosystem/EcosystemConfig';
 
 
-const routeConfigs = [InitiativesConfig, EventsConfig, IncentivesConfig, NewsConfig, AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
+const routeConfigs = [EcosystemConfig, InitiativesConfig, EventsConfig, IncentivesConfig, NewsConfig, AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(routeConfigs, settingsConfig.defaultAuth),
