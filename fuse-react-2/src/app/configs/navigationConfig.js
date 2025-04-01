@@ -37,7 +37,7 @@ const navigationConfig = [
     title: 'Incentives',
     translate: 'INCENTIVES',
     type: 'item',
-    icon: 'heroicons-outline:document-text',
+    icon: 'heroicons-outline:globe-alt',
     url: '/dashboard/incentives'
   },
   {
@@ -45,7 +45,7 @@ const navigationConfig = [
     title: 'Events',
     translate: 'EVENTS',
     type: 'item',
-    icon: 'heroicons-outline:document-text',
+    icon: 'heroicons-outline:calendar',
     url: '/dashboard/events'
   },
   {
@@ -53,8 +53,16 @@ const navigationConfig = [
     title: 'Initiatives',
     translate: 'INITIATIVES',
     type: 'item',
-    icon: 'heroicons-outline:document-text',
+    icon: 'heroicons-outline:hashtag',
     url: '/dashboard/initiatives'
+  },
+  {
+    id: 'ecosystem-component',
+    title: 'Ecosystem',
+    translate: 'ECOSYSTEM',
+    type: 'item',
+    icon: 'heroicons-outline:cloud',
+    url: '/dashboard/ecosystem'
   },
 ];
 
