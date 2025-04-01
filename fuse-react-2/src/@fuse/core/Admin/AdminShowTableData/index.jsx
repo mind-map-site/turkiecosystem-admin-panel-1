@@ -11,7 +11,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { ContentCopyOutlined } from '@mui/icons-material';
 import copyToClipboard from '@fuse/utils/copyContent';
 
-const columns = [
+const baseColumns = [
     { id: 'id', label: 'Id', minWidth: 170 },
     { id: 'title', label: 'Title', minWidth: 100 },
     {
@@ -44,8 +44,21 @@ const columns = [
     },
 ];
 
-export default function AdminShowTableData({ setReload, data }) {
-    // console.log("news: ", data)
+
+export default function AdminShowTableData({ setReload, data, section =" " }) {
+    const getColumns = (section) => {
+        if (section === 'ecosystem') {
+            return [
+                ...baseColumns,
+                { id: 'tagCountry', label: 'Tag Country', minWidth: 170, align: 'right' },
+                { id: 'tagProfile', label: 'Tag Profile', minWidth: 170, align: 'right' },
+                { id: 'tagIndustry', label: 'Tag Industry', minWidth: 170, align: 'right' },
+            ];
+        }
+        return baseColumns;
+    };
+    const columns = getColumns(section);
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -73,6 +86,7 @@ export default function AdminShowTableData({ setReload, data }) {
                                     {column.label}
                                 </TableCell>
                             ))}
+                           
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -85,7 +99,7 @@ export default function AdminShowTableData({ setReload, data }) {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align="center">
-                                                    {column.id === 'title' || column.id === 'description' ?
+                                                    {column.id === 'title' || column.id === 'description'  ?
                                                         <Box>
                                                             <Typography fontWeight={600}>en:</Typography>
                                                             <Typography>{row[column.id]?.en} </Typography>
@@ -95,6 +109,16 @@ export default function AdminShowTableData({ setReload, data }) {
                                                             <Typography>{row[column.id]?.az}</Typography>
                                                         </Box>
                                                         :
+                                                        column.id.startsWith("tag") ? 
+                                                            <Box>
+                                                                <Typography fontWeight={600}>en:</Typography>
+                                                                <Typography>{row[column.id]?.name.en} </Typography>
+                                                                <Typography fontWeight={600}>ru:</Typography>
+                                                                <Typography>{row[column.id]?.name.ru}</Typography>
+                                                                <Typography fontWeight={600}>az:</Typography>
+                                                                <Typography>{row[column.id]?.name.az}</Typography>
+                                                            </Box> :
+                                                            
                                                         column.id === "image" ?
 
                                                             <Box>
