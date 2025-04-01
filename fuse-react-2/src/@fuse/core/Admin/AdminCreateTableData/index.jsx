@@ -1,29 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import useFormikForm from 'src/hooks/use-formik-form';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
     Card,
     CardContent,
-    CardHeader,
     CardActions,
-    Typography,
     Accordion,
     AccordionSummary,
     AccordionDetails,
     TextField,
     Box,
     Button,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
 } from '@mui/material';
+import { getFilterData } from 'src/@mock-api/api/ecosystem-api';
 
 const AdminCreateTableData = ({ setReload, createData, initialValues, useValidation, inputs, section }) => {
     const validation = useValidation();
     const formik = useFormikForm(initialValues, validation, onSubmit);
+    const [filterData, setFilterData] = useState(null);
+
+    useEffect(() => {
+        if (section === "ecosystem") {
+            const getEcosystemFilterData = async () => {
+                const res = await getFilterData();
+                if (res.status === 200) {
+                    setFilterData(res.data.data);
+                }
+            }
+
+            getEcosystemFilterData();
+            
+        }
+    }, [])
+    
 
     function onSubmit(values) {
-        // console.log(values);
+        console.log(values);
         let formData = {}
-        if (section !== "ecosystem" ) {
+        if (section !== "ecosystem") {
             formData = {
                 'description.en': values.descriptionEn,
                 'description.az': values.descriptionAz,
@@ -36,6 +55,19 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                 formData['content.en'] = "This is unused content";
                 formData['content.az'] = "This is unused content";
                 formData['content.ru'] = "This is unused content";
+            }
+        } else {
+            console.log(values);
+            formData = {
+                'description.en': values.descriptionEn,
+                'description.az': values.descriptionAz,
+                'description.ru': values.descriptionRu,
+                'title.en': values.titleEn,
+                'title.az': values.titleAz,
+                'title.ru': values.titleRu,
+                "tagIndustry": values.tagIndustry,
+                "tagProfile": values.tagProfile,
+                'tagCountry': values.tagCountry
             }
         }
 
@@ -66,7 +98,7 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
 
     return (
         <div>
-            {section !== "ecosystem"  &&
+            {section !== "ecosystem" &&
                 <Box my={2}>
                     You will create just title and description, image will be add with another tab.
                 </Box>
@@ -84,7 +116,7 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                 </p>
                             </Box>
 
-                            {isLang &&
+                            {(type === "text" && isLang) ?
                                 <Card className="mt-2">
                                     <CardContent className="space-y-2">
                                         <Accordion>
@@ -100,8 +132,8 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     name={`${name}En`}
                                                     value={formik.values[`${name}En`]}
                                                     onChange={formik.handleChange}
-                                                    // error={formik.touched[name] && Boolean(formik.errors[name])}
-                                                    // helperText={formik.touched[name] && formik.errors[name]}
+                                                // error={formik.touched[name] && Boolean(formik.errors[name])}
+                                                // helperText={formik.touched[name] && formik.errors[name]}
                                                 />
                                             </AccordionDetails>
                                         </Accordion>
@@ -119,8 +151,8 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     name={`${name}Ru`}
                                                     value={formik.values[`${name}Ru`]}
                                                     onChange={formik.handleChange}
-                                                    // error={formik.touched[name] && Boolean(formik.errors[name])}
-                                                    // helperText={formik.touched[name] && formik.errors[name]}
+                                                // error={formik.touched[name] && Boolean(formik.errors[name])}
+                                                // helperText={formik.touched[name] && formik.errors[name]}
                                                 />
                                             </AccordionDetails>
                                         </Accordion>
@@ -138,23 +170,41 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     name={`${name}Az`}
                                                     value={formik.values[`${name}Az`]}
                                                     onChange={formik.handleChange}
-                                                    // error={formik.touched[name] && Boolean(formik.errors[name])}
-                                                    // helperText={formik.touched[name] && formik.errors[name]}
+                                                // error={formik.touched[name] && Boolean(formik.errors[name])}
+                                                // helperText={formik.touched[name] && formik.errors[name]}
                                                 />
                                             </AccordionDetails>
                                         </Accordion>
                                     </CardContent>
-                                </Card>
+                                </Card> :
+                                (type === "select" && filterData ) ?
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label">{title}</InputLabel>
+                                        <Select
+                                            name={name}
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={formik.values[name]}
+                                            label={title}
+                                            onChange={formik.handleChange}
+                                        >
+                                            {filterData[id].map(tag => {
+                                                return <MenuItem value={tag?.id}>{tag?.name?.en}</MenuItem>
+                                            })}
+
+                                        </Select>
+                                    </FormControl>
+                                    : null
                             }
 
                         </div>
                     })
                 }
-               <CardActions className="p-4">
-                       <Button type="submit" variant="contained" color="primary">
-                         Submit
-                       </Button>
-                     </CardActions>
+                <CardActions className="p-4">
+                    <Button type="submit" variant="contained" color="primary">
+                        Submit
+                    </Button>
+                </CardActions>
             </form>
         </div>
     )
