@@ -15,6 +15,8 @@ import AdminShowTableData from "../AdminShowTableData";
 import AdminShowSingleData from "../AdminShowSingleData";
 import AdminCreateTableData from "../AdminCreateTableData";
 import AdminDeleteTableData from "../AdminDeleteTableData";
+import AdminEcosystemFilterData from "../Ecosystem/AdminEcosystemFilterData";
+import FilterEcosystemTags from "../Ecosystem/FilterEcosystemTags";
 
 
 const componentMap = {
@@ -27,6 +29,8 @@ const componentMap = {
     "UpdateNews": AdminUpdateData,
     "AddImg": AdminAddImage,
     "DeleteImg": AdminDeleteImage,
+    "EcosystemFilterCrud": AdminEcosystemFilterData,
+    "EcosystemFilter": FilterEcosystemTags
 }
 
 
