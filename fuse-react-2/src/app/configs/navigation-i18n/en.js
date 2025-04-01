@@ -6,6 +6,7 @@ const locale = {
   INCENTIVES: 'Incentives',
   EVENTS: 'Events',
   INITIATIVES: 'Initiatives',
+  ECOSYSTEM: 'Ecosystem',
 };
 
 export default locale;
