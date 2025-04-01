@@ -12,7 +12,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MiniLoader from "@fuse/core/MiniLoader";
 import { Box } from '@mui/system';
 
-const AdminShowSingleData = ({ getSingleData, data }) => {
+const AdminShowSingleData = ({ getSingleData, data, section }) => {
     const [singleData, setSingleData] = useState(null)
     const [newsId, setNewsId] = useState(null)
     const [loading, setLoading] = useState(false);
@@ -49,7 +49,7 @@ const AdminShowSingleData = ({ getSingleData, data }) => {
 
             {loading ? <MiniLoader /> :
                 <>
-                    <Box className="p-2">
+                    <Box className="p-2 mt-6">
                         <h5 className="text-lg font-semibold">Title</h5>
                         <p className="text-sm">
                             Your title is available in three different languages.
@@ -105,7 +105,7 @@ const AdminShowSingleData = ({ getSingleData, data }) => {
                         </CardContent>
                     </Card>
 
-                    <Box className="p-2">
+                    <Box className="p-2 mt-6">
                         <h5 className="text-lg font-semibold">Description</h5>
                         <p className="text-sm">
                             Your description is available in three different languages.
@@ -162,7 +162,7 @@ const AdminShowSingleData = ({ getSingleData, data }) => {
                     </Card>
 
 
-                    <Box className="p-2">
+                    <Box className="p-2 mt-6">
                         <h5 className="text-lg font-semibold">View Count</h5>
                         <p className="text-sm">
                             View Count for your news data
@@ -191,7 +191,7 @@ const AdminShowSingleData = ({ getSingleData, data }) => {
                     </Card>
 
 
-                    <Box className="p-2">
+                    <Box className="p-2 mt-6">
                         <h5 className="text-lg font-semibold">Date</h5>
                         <p className="text-sm">
                             Created Date for your news
@@ -219,9 +219,7 @@ const AdminShowSingleData = ({ getSingleData, data }) => {
                         </CardContent>
                     </Card>
 
-                    <Box>
-
-
+                    <Box className="mt-6">
                         <h5 className="text-lg font-semibold">Image</h5>
                         <p className="text-sm">
                             This image will be displayed in the About tab.
@@ -293,6 +291,180 @@ const AdminShowSingleData = ({ getSingleData, data }) => {
                                 </Accordion>
                             </CardContent>
                         </Card>
+                    }
+
+                    {section === "ecosystem" && 
+                        <>
+
+                        <Box className="p-2 mt-6">
+                            <h5 className="text-lg font-semibold">Tag Country</h5>
+                            <p className="text-sm">
+                                Your Tag Country is available in three different languages.
+                            </p>
+                        </Box>
+
+                        <Card className="">
+                            <CardContent className="space-y-2">
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        English
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagCountry?.name.en}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        Russian
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagCountry?.name.ru}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        Azerbaijani
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagCountry?.name.az}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+                            </CardContent>
+                        </Card>
+
+                        <Box className="p-2 mt-6">
+                            <h5 className="text-lg font-semibold">Tag Industry</h5>
+                            <p className="text-sm">
+                                Your Tag Industry is available in three different languages.
+                            </p>
+                        </Box>
+
+                        <Card className="">
+                            <CardContent className="space-y-2">
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        English
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagIndustry?.name.en}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        Russian
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagIndustry?.name.ru}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        Azerbaijani
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagIndustry?.name.az}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+                            </CardContent>
+                        </Card>
+
+                        <Box className="p-2 mt-6">
+                            <h5 className="text-lg font-semibold">Tag Profile</h5>
+                            <p className="text-sm">
+                                Your Tag Profile is available in three different languages.
+                            </p>
+                        </Box>
+
+                        <Card className="">
+                            <CardContent className="space-y-2">
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        English
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagProfile?.name.en}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        Russian
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagProfile?.name.ru}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        Azerbaijani
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TextField
+                                            multiline
+                                            rows={6}
+                                            fullWidth
+                                            value={singleData?.tagProfile?.name.az}
+                                            InputProps={{ readOnly: true }}
+                                        />
+                                    </AccordionDetails>
+                                </Accordion>
+                            </CardContent>
+                        </Card>
+
+                        </>
                     }
                 </>
             }
