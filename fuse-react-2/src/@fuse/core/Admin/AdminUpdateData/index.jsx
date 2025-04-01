@@ -14,7 +14,12 @@ import {
   Box,
   Button,
   Stack,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
+import { getFilterData } from 'src/@mock-api/api/ecosystem-api';
 
 const AdminUpdateData = ({
   initialValues,
@@ -27,18 +32,33 @@ const AdminUpdateData = ({
 }) => {
   const [newsId, setNewsId] = useState("");
   const [singleData, setSingleData] = useState("");
+  const [filterData, setFilterData] = useState("");
   const validations = useValidation();
   const formik = useFormikForm(initialValues, validations, onSubmit);
 
   useEffect(() => {
+    const getEcosystemFilterData = async () => {
+      const res = await getFilterData();
+      if (res.status === 200) {
+        setFilterData(res.data.data);
+      }
+    }
+    getEcosystemFilterData();
+
+
     if (singleData) {
       const updatedValues = { ...formik.values };
       inputs.forEach((input) => {
-        if (input.isLang) {
+        if (input.isLang && input.type === "text") {
           updatedValues[`${input.name}En`] = singleData[input.id]?.en || "";
           updatedValues[`${input.name}Ru`] = singleData[input.id]?.ru || "";
           updatedValues[`${input.name}Az`] = singleData[input.id]?.az || "";
-        } else {
+        }
+        else if (input.type === "select") {
+          console.log(singleData[input.name]);
+          updatedValues[input.name] = singleData[input.name]._id || "";
+        }
+        else {
           updatedValues[input.name] = singleData[input.id] || "";
         }
       });
@@ -53,7 +73,10 @@ const AdminUpdateData = ({
         formattedData[`${input.id}.en`] = values[`${input.name}En`];
         formattedData[`${input.id}.ru`] = values[`${input.name}Ru`];
         formattedData[`${input.id}.az`] = values[`${input.name}Az`];
-      } else {
+      } else if (input.type === "select" ) {
+        formattedData[input.name] = values[input.name];
+      }
+      else {
         formattedData[input.id] = values[input.name];
       }
     });
@@ -69,6 +92,7 @@ const AdminUpdateData = ({
       setReload((prev) => prev + 1);
     }
   }
+  console.log(formik.values.tagCountry);
 
   const handleSingleData = () => {
     console.log("News ID:", newsId, "Data:", data);
@@ -78,11 +102,15 @@ const AdminUpdateData = ({
 
   return (
     <div>
-      {(section !== "ecosystem"  )&& (
+      {(section !== "ecosystem") ? (
         <Box my={2}>
           You will create just title and description, image can be updated with another tab.
         </Box>
-      )}
+
+      ) : <Box my={2}>
+        You will update title and description and tags for profile, industry and country, image can be updated with another tab.
+      </Box>
+      }
 
       <Stack justifyContent="center" alignItems="center" className="my-3">
         <Typography>
@@ -107,7 +135,7 @@ const AdminUpdateData = ({
               <p className="text-sm">{description}</p>
             </Box>
 
-            {isLang && (
+            {(isLang && type === "text") ? (
               <Card className="mt-2">
                 <CardContent className="space-y-2">
                   {/** Render language-specific fields dynamically */}
@@ -143,9 +171,26 @@ const AdminUpdateData = ({
                   ))}
                 </CardContent>
               </Card>
-            )}
+            ) : (type === "select" && filterData) ?
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">{title}</InputLabel>
+                <Select
+                  name={name}
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={formik.values[name]}
+                  label={title}
+                  onChange={formik.handleChange}
+                >
+                  {filterData[id].map(tag => {
+                    return <MenuItem value={tag?.id}>{tag?.name?.en}</MenuItem>
+                  })}
 
-            {!isLang && (
+                </Select>
+              </FormControl>
+              : null}
+
+            {(!isLang && type !== "select"  ) && (
               <TextField
                 fullWidth
                 id={id}
