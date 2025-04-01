@@ -46,8 +46,8 @@ const baseColumns = [
 
 
 export default function AdminShowTableData({ setReload, data, section =" " }) {
-    const getColumns = (section) => {
-        if (section === 'ecosystem') {
+    const getColumns = (_section) => {
+        if (_section === 'ecosystem') {
             return [
                 ...baseColumns,
                 { id: 'tagCountry', label: 'Tag Country', minWidth: 170, align: 'right' },
