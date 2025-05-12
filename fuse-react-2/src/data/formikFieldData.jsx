@@ -12,12 +12,8 @@ export const useAboutContentValidation = () => {
     contentEn: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Content is required'),
-    contentRu: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Content is required'),
+    contentRu: string(),
     contentAz: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Content is required'),
   });
 };
 
@@ -27,21 +23,13 @@ export const useNewsFormValidation = () => {
     titleEn: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Title is required'),
-    titleRu: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Title is required'),
-    titleAz: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Title is required'),
+    titleRu: string(),
+    titleAz: string(),
     descriptionEn: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Description is required'),
-    descriptionRu: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Description is required'),
-    descriptionAz: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Description is required'),
+    descriptionRu: string(),
+    descriptionAz: string(),
   })
 }
 
@@ -57,21 +45,14 @@ export const useEcosystemFormValidation = () => {
     titleEn: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Title is required'),
-    titleRu: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Title is required'),
-    titleAz: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Title is required'),
+    titleRu: string(),
+    titleAz: string(),
     descriptionEn: string()
       .min(10, 'Text must be at least 10 characters long.')
       .required('Description is required'),
-    descriptionRu: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Description is required'),
+    descriptionRu: string(),
     descriptionAz: string()
-      .min(10, 'Text must be at least 10 characters long.')
-      .required('Description is required'),
+      .min(10, 'Text must be at least 10 characters long.'),
     tagCountry: string().required("Tag Country is required"),
     tagProfile: string().required("Tag Profile is required"),
     tagIndustry: string().required("Tag Industry is required"),
@@ -83,9 +64,9 @@ export const ecosystemFormInitialValues = { titleEn: '', titleRu: '', titleAz: '
 export const ecosystemCreateFormInputs = [
   { title: "Title", description: "You can update or create title in three different languages (EN, AZ, RU).", type: "text", isLang: true, id: "title", name: "title" },
   { title: "Description", description: "You can update or create description in three different languages (EN, AZ, RU).", type: "text", isLang: true, id: "description", name: "description" },
-  { title: "Tag Country", description: "Select appropriate country", type: "select", isLang: false, id: "country", name: "tagCountry"},
-  { title: "Tag Profile", description: "Select appropriate profile", type: "select", isLang: false, id: "profile", name: "tagProfile"},
-  { title: "Tag Industry", description: "Select appropriate industry", type: "select", isLang: false, id: "industry", name: "tagIndustry"}
+  { title: "Tag Country", description: "Select appropriate country", type: "select", isLang: false, id: "country", name: "tagCountry" },
+  { title: "Tag Profile", description: "Select appropriate profile", type: "select", isLang: false, id: "profile", name: "tagProfile" },
+  { title: "Tag Industry", description: "Select appropriate industry", type: "select", isLang: false, id: "industry", name: "tagIndustry" }
 ]
 
 
@@ -98,7 +79,7 @@ export const useEcosystemTagsFormValidation = () => {
   })
 }
 
-export const ecosystemTagsInitialValues = {  tagCountry: "", tagProfile: "", tagIndustry: "" }
+export const ecosystemTagsInitialValues = { tagCountry: "", tagProfile: "", tagIndustry: "" }
 
 
 export const ecosystemTagsFormInputs = [
