@@ -86,7 +86,6 @@ export default function AdminShowTableData({ setReload, data, section =" " }) {
                                     {column.label}
                                 </TableCell>
                             ))}
-                           
                         </TableRow>
                     </TableHead>
                     <TableBody>

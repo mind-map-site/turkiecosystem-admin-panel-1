@@ -34,10 +34,10 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
             }
 
             getEcosystemFilterData();
-            
+
         }
     }, [])
-    
+
 
     function onSubmit(values) {
         console.log(values);
@@ -132,8 +132,8 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     name={`${name}En`}
                                                     value={formik.values[`${name}En`]}
                                                     onChange={formik.handleChange}
-                                                // error={formik.touched[name] && Boolean(formik.errors[name])}
-                                                // helperText={formik.touched[name] && formik.errors[name]}
+                                                    error={formik.touched[`${name}En`] && Boolean(formik.errors[`${name}En`])}
+                                                    helperText={formik.touched[`${name}En`] && formik.errors[`${name}En`]}
                                                 />
                                             </AccordionDetails>
                                         </Accordion>
@@ -151,8 +151,8 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     name={`${name}Ru`}
                                                     value={formik.values[`${name}Ru`]}
                                                     onChange={formik.handleChange}
-                                                // error={formik.touched[name] && Boolean(formik.errors[name])}
-                                                // helperText={formik.touched[name] && formik.errors[name]}
+                                                    error={formik.touched[`${name}Ru`] && Boolean(formik.errors[`${name}Ru`])}
+                                                    helperText={formik.touched[`${name}Ru`] && formik.errors[`${name}Ru`]}
                                                 />
                                             </AccordionDetails>
                                         </Accordion>
@@ -170,14 +170,14 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     name={`${name}Az`}
                                                     value={formik.values[`${name}Az`]}
                                                     onChange={formik.handleChange}
-                                                // error={formik.touched[name] && Boolean(formik.errors[name])}
-                                                // helperText={formik.touched[name] && formik.errors[name]}
+                                                    error={formik.touched[`${name}Az`] && Boolean(formik.errors[`${name}Az`])}
+                                                    helperText={formik.touched[`${name}Az`] && formik.errors[`${name}Az`]}
                                                 />
                                             </AccordionDetails>
                                         </Accordion>
                                     </CardContent>
                                 </Card> :
-                                (type === "select" && filterData ) ?
+                                (type === "select" && filterData) ?
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label">{title}</InputLabel>
                                         <Select
