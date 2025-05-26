@@ -64,6 +64,30 @@ const navigationConfig = [
     icon: 'heroicons-outline:cloud',
     url: '/dashboard/ecosystem'
   },
+  {
+    id: 'privacy-policy-component',
+    title: 'Privacy Policy',
+    translate: 'PRIVACYPOLICY',
+    type: 'item',
+    icon: 'heroicons-outline:eye-off',
+    url: '/dashboard/privacy-policy'
+  },
+  {
+    id: 'socials-component',
+    title: 'socials',
+    translate: 'SOCIALS',
+    type: 'item',
+    icon: 'heroicons-outline:chat',
+    url: '/dashboard/socials'
+  },
+  {
+    id: 'logo-component',
+    title: 'Logo',
+    translate: 'LOGO',
+    type: 'item',
+    icon: 'heroicons-outline:document',
+    url: '/dashboard/logo'
+  },
 ];
 
 export default navigationConfig;
