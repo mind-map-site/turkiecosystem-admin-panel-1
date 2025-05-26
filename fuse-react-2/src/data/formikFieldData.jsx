@@ -87,3 +87,30 @@ export const ecosystemTagsFormInputs = [
   { title: "Tag Profile", description: "Select appropriate profile", type: "select", isLang: false, id: "profile", name: "tagProfile" },
   { title: "Tag Industry", description: "Select appropriate industry", type: "select", isLang: false, id: "industry", name: "tagIndustry" }
 ]
+
+export const useSocialMediaForm = () => {
+  const medias = [
+    { value: "Ins", label: "Instragram" },
+    { value: "Fc", label: "Facebook" },
+    { value: "Yt", label: "Youtube" },
+    { value: "Ln", label: "Linkedin" },
+    { value: "Wt", label: "Whatsapp" },
+    { value: "Tg", label: "Telegram" },
+  ]
+  return (
+    {
+      validation: object({
+        url: string(),
+        type: string(),
+      }),
+      initialValues: {
+        url: "",
+        type: "",
+      },
+      inputs: [
+        { title: "Social Media Url", description: "Enter appropriate social url", type: "text", id: "url", name: "url" },
+        { title: "Social Media Type", description: "Select appropriate social url", type: "select", options: medias, id: "type", name: "type" },
+      ]
+    }
+  )
+}
