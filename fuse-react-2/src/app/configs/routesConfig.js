@@ -11,11 +11,14 @@ import AboutConfig from '../main/about/AboutConfig';
 import NewsConfig from '../main/news/NewsConfig';
 import IncentivesConfig from '../main/incentives/IncentivesConfig';
 import EventsConfig from '../main/events/EventsConfig';
+import SocialsConfig from '../main/socials/SocialsConfig';
 import InitiativesConfig from '../main/initiatives/InitiativesConfig';
 import EcosystemConfig from '../main/ecosystem/EcosystemConfig';
+import PrivacyPolicyConfig from '../main/privacy-policy/PrivacyPolicyConfig';
+import LogoConfig from '../main/logo/LogoConfig';
 
 
-const routeConfigs = [EcosystemConfig, InitiativesConfig, EventsConfig, IncentivesConfig, NewsConfig, AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
+const routeConfigs = [LogoConfig, PrivacyPolicyConfig,SocialsConfig,EcosystemConfig, InitiativesConfig, EventsConfig, IncentivesConfig, NewsConfig, AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(routeConfigs, settingsConfig.defaultAuth),
