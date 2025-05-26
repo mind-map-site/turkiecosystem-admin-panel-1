@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, CardContent, CardHeader, CardActions, Typography, TextField } from '@mui/material';
-import { sendAboutImage } from 'src/@mock-api/api/about-api';
 import { toast } from 'react-toastify';
+import { handleResponseSuccess } from '@fuse/utils/response';
 
 const AdminAddImage = ({ id, setReload, image, addImage, section }) => {
   const [file, setFile] = useState(null);
@@ -24,12 +24,13 @@ const AdminAddImage = ({ id, setReload, image, addImage, section }) => {
       const formData = new FormData();
       formData.append('image', file);
       try {
-        const res = await addImage(id || value, formData);
-        if (res.status === 201) {
-          toast.success('Image uploaded successfully');
-          setReload((prev) => prev + 1);
+        if (section === "logo") {
+          const res = await addImage(formData);
+          handleResponseSuccess(res, "image", setReload);
         } else {
-          toast.error('Failed to upload image');
+          const res = await addImage(id || value, formData);
+          handleResponseSuccess(res, "image", setReload);
+
         }
       } catch {
         toast.error('Failed to upload image. There was a problem with your request.');
@@ -72,7 +73,7 @@ const AdminAddImage = ({ id, setReload, image, addImage, section }) => {
         <CardContent className="space-y-2">
           <Typography variant="body2">Your Current Image</Typography>
           {file ? (
-            <img src={imageUrl} alt="Selected" style={{width:"200px", height:"auto"}} />
+            <img src={imageUrl} alt="Selected" style={{ width: "200px", height: "auto" }} />
           ) : (
             <Typography variant="body2">There is no image</Typography>
           )}
