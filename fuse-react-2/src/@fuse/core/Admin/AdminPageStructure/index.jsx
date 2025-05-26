@@ -17,9 +17,15 @@ import AdminCreateTableData from "../AdminCreateTableData";
 import AdminDeleteTableData from "../AdminDeleteTableData";
 import AdminEcosystemFilterData from "../Ecosystem/AdminEcosystemFilterData";
 import FilterEcosystemTags from "../Ecosystem/FilterEcosystemTags";
+import AdminSimpleCrudShowTable from "../AdminSimpleCrudShowTable";
+import AdminPrivacyPolicy from "../AdminPrivacyPolicy";
+import AdminShowImage from "../AdminShowImage";
 
 
 const componentMap = {
+    "Logo": AdminShowImage,
+    "PrivacyPolicy": AdminPrivacyPolicy,
+    "SimpleCrudData": AdminSimpleCrudShowTable,
     "ShowAbout": AdminShowContent,
     "ShowNews": AdminShowTableData,
     "CreateNews": AdminCreateTableData,
@@ -32,7 +38,6 @@ const componentMap = {
     "EcosystemFilterCrud": AdminEcosystemFilterData,
     "EcosystemFilter": FilterEcosystemTags
 }
-
 
 const AdminPageStructure = ({
     getContentAPI,
