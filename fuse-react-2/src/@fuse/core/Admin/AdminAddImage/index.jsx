@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, CardContent, CardHeader, CardActions, Typography, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
-import { handleResponseSuccess } from '@fuse/utils/response';
+import handleResponseSuccess from '@fuse/utils/response';
 
 const AdminAddImage = ({ id, setReload, image, addImage, section }) => {
   const [file, setFile] = useState(null);

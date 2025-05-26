@@ -29,13 +29,14 @@ const UpdateModal = ({ open, setOpen, setReload, updatedData, setUpdatedData, se
     }
 
     function handleApiTag(id) {
+        let putFunction = null;
         if (updatedData.section === "profile") {
             const sendedData = {
                 "name.en": updatedData.profileValues.en,
                 "name.ru": updatedData.profileValues.ru,
                 "name.az": updatedData.profileValues.az
             }
-            return putTagProfiles(id, sendedData);
+            putFunction = putTagProfiles(id, sendedData);
         }
         if (updatedData.section === "industry") {
             const sendedData = {
@@ -43,7 +44,7 @@ const UpdateModal = ({ open, setOpen, setReload, updatedData, setUpdatedData, se
                 "name.ru": updatedData.countryValues.ru,
                 "name.az": updatedData.countryValues.az
             }
-            return putTagCountry(id, sendedData);
+            putFunction = putTagCountry(id, sendedData);
         }
         if (updatedData.section === "country") {
             const sendedData = {
@@ -51,8 +52,9 @@ const UpdateModal = ({ open, setOpen, setReload, updatedData, setUpdatedData, se
                 "name.ru": updatedData.industryValues.ru,
                 "name.az": updatedData.industryValues.az
             }
-            return putTagCountry(id, sendedData);
+            putFunction = putTagCountry(id, sendedData);
         }
+        return putFunction;
     }
 
     const handleSubmitUpdate = async () => {

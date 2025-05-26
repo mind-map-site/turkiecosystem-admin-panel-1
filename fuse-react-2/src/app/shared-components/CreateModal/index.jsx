@@ -20,15 +20,17 @@ const CreateModal = ({ open, setOpen, setReload, createdData, setCreatedData, se
 
 
     function handleResponseTag(sendedData_) {
+        let postFunction = null;
         if (createdData.section === "profile") {
-            return postTagProfiles(sendedData_);
+            postFunction =  postTagProfiles(sendedData_);
         }
         if (createdData.section === "industry") {
-            return postTagIndustry(sendedData_);
+            postFunction = postTagIndustry(sendedData_);
         }
         if (createdData.section === "country") {
-            return postTagCountry(sendedData_);
+            postFunction = postTagCountry(sendedData_);
         }
+        return postFunction;
     }
 
     function handleResponseCodes(res) {

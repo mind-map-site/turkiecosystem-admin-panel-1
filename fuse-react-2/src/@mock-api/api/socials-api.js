@@ -1,4 +1,5 @@
 import axiosInstance from "./axiosInstance";
+
 const prefix = "/socials"
 
 export const getSocialMedia = async () => {

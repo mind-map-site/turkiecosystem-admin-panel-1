@@ -1,4 +1,4 @@
-import { handleResponseSuccess } from '@fuse/utils/response';
+import handleResponseSuccess from '@fuse/utils/response';
 import { Button } from '@mui/material';
 import CreateSimpleModal from 'app/shared-components/CreateSimpleModal';
 import CrudTable from 'app/shared-components/CrudTable';
@@ -6,10 +6,10 @@ import UpdateSimpleModal from 'app/shared-components/UpdateSimpleModal';
 import React, { useState } from 'react';
 
 const AdminSimpleCrudShowTable = ({ data, setReload, section, singleGetApi, createApi, deleteApi, updateApi, useDataForm }) => {
-    //create modal
+    // create modal
     const [openC, setOpenC] = useState(false);
 
-    //update modal 
+    // update modal 
     const [updateId, setUpdateId] = useState(null);
     const [openU, setOpenU] = useState(false);
 
