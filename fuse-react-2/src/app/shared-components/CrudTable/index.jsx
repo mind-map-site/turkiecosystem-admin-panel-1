@@ -12,11 +12,18 @@ import {
     Typography
 } from '@mui/material';
 
-const CrudTable = ({ title, data = [], setUpdateId, onDelete, setOpenU }) => {
+const CrudTable = ({ title, data = [], setUpdateId, setUpdateData, onDelete, setOpenU, isFullCrud, inputs }) => {
     function handleUpdate(itemId) {
         setUpdateId(itemId);
         setOpenU(true);
     }
+
+    function handleUpdateData(updatedData_) {
+        console.log(updatedData_)
+        setUpdateData(updatedData_);
+        setOpenU(true);
+    }
+    console.log(data);
     return (
         <>
             <Typography variant="h5" fontWeight="bold" my={2}>
@@ -28,7 +35,7 @@ const CrudTable = ({ title, data = [], setUpdateId, onDelete, setOpenU }) => {
                     <Table stickyHeader aria-label="crud table">
                         <TableHead>
                             <TableRow>
-                                {data[0] &&
+                                {(data[0] && isFullCrud) ?
                                     Object.keys(data[0]).map(
                                         (key) =>
                                             key !== 'id' && (
@@ -36,13 +43,21 @@ const CrudTable = ({ title, data = [], setUpdateId, onDelete, setOpenU }) => {
                                                     {key}
                                                 </TableCell>
                                             )
-                                    )}
+                                    ) : <>
+                                        {Object.keys(data).map(
+                                            (key) => (
+                                                <TableCell key={key} align="center" className='capitalize font-bold'>
+                                                    {key}
+                                                </TableCell>
+                                            )
+                                        )}
+                                    </>}
                                 <TableCell align="center" className='font-bold'>Operations</TableCell>
                             </TableRow>
                         </TableHead>
 
                         <TableBody>
-                            {data.map((item) => (
+                            {isFullCrud ? data.map((item) => (
                                 <TableRow hover key={item.id}>
                                     {Object.keys(item).map(
                                         (key) =>
@@ -59,13 +74,40 @@ const CrudTable = ({ title, data = [], setUpdateId, onDelete, setOpenU }) => {
                                             <Button variant="outlined" color="primary" onClick={() => handleUpdate(item.id)}>
                                                 Update
                                             </Button>
-                                            <Button variant="outlined" color="error" onClick={() => onDelete(item.id)}>
-                                                Delete
-                                            </Button>
+                                            {
+                                                isFullCrud &&
+                                                <Button variant="outlined" color="error" onClick={() => onDelete(item.id)}>
+                                                    Delete
+                                                </Button>
+                                            }
                                         </Box>
                                     </TableCell>
                                 </TableRow>
-                            ))}
+                            )) : <TableRow>
+                                {
+                                    Object.entries(data).map((item, index) => {
+                                        console.log(item)
+                                        return item[0] === "id" ? <TableCell>{index + 1}</TableCell> : <TableCell>{item[1]}</TableCell>
+                                    })
+                                }
+                                <TableCell align="center">
+                                    <Box display="flex" gap={1} justifyContent="center">
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            onClick={() => {
+                                                const resData = inputs.reduce((acc, input) => {
+                                                    acc[input.id] = data[input.id];
+                                                    return acc;
+                                                }, {});
+                                                handleUpdateData(resData);
+                                            }}
+                                        >
+                                            Update
+                                        </Button>
+                                    </Box>
+                                </TableCell>
+                            </TableRow>}
                         </TableBody>
                     </Table>
                 </TableContainer>

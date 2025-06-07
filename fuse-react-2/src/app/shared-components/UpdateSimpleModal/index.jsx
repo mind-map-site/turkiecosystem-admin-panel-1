@@ -1,9 +1,9 @@
 import { Button, FormControl, InputLabel, MenuItem, Modal, Paper, Select, TextField } from '@mui/material'
 import { Box } from '@mui/system';
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import useFormikForm from 'src/hooks/use-formik-form';
 
-const UpdateSimpleModal = ({ open, setOpen, singleGetApi, updateId, handleUpdate, useDataForm }) => {
+const UpdateSimpleModal = ({ open, setOpen, singleGetApi, updateId, updateData, handleUpdate, useDataForm, isFullCrud }) => {
     console.log(open);
     const { validation, initialValues, inputs } = useDataForm();
     const formik = useFormikForm(initialValues, validation, onSubmit);
@@ -25,22 +25,31 @@ const UpdateSimpleModal = ({ open, setOpen, singleGetApi, updateId, handleUpdate
         p: 4,
     };
 
-
-
     useEffect(() => {
-        if (open) {
-            const getSingleData = async ()=>{
+        if (open && isFullCrud) {
+            const getSingleData = async () => {
                 const res = await singleGetApi(updateId);
-                console.log(res);
                 if (res.success) {
-                    const formikValues = {
-                        type: res.data.type,
-                        url: res.data.url
-                    }
+                    const formikValues = {};
+
+                    inputs.forEach(input => {
+                        const key = input.name;
+                        formikValues[key] = res.data[key] ?? ""; // fallback to empty string if undefined
+                    });
+
+
                     formik.setValues(formikValues);
                 }
             }
             getSingleData();
+        } else {
+            const formikValues = {};
+
+            inputs.forEach(input => {
+                const key = input.name;
+                formikValues[key] = updateData[key] ?? ""; // fallback to empty string if undefined
+            });
+            formik.setValues(formikValues);
         }
     }, [])
 
