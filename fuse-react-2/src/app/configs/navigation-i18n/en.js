@@ -10,6 +10,8 @@ const locale = {
   INITIATIVES: 'Initiatives',
   ECOSYSTEM: 'Ecosystem',
   SOCIALS: 'Social Medias',
+  LATESTNEWS: 'Latest News',
+  INFOPORTAL: 'Information Portal',
 };
 
 export default locale;
