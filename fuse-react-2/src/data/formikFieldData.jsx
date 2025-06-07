@@ -114,3 +114,39 @@ export const useSocialMediaForm = () => {
     }
   )
 }
+
+export const useLatestNewsForm = () => {
+
+  return (
+    {
+      validation: object({
+        title: string(),
+        description: string(),
+      }),
+      initialValues: {
+        title: "",
+        description: "",
+      },
+      inputs: [
+        { title: "Latest News title", description: "Enter appropriate title", type: "text", id: "title", name: "title" },
+        { title: "Latest News description", description: "Select appropriate description", type: "text",  id: "description", name: "description" },
+      ]
+    }
+  )
+}
+
+export const useInfoPortalForm = () => {
+
+  return (
+    {
+      validation: object({
+        websiteName: string(),
+      }),
+      initialValues: {
+        websiteName: "",
+      },
+      inputs: [
+        { title: "Website Name", description: "Enter appropriate website name", type: "text", id: "websiteName", name: "websiteName" },      ]
+    }
+  )
+}
