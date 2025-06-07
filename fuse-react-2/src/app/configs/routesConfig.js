@@ -16,9 +16,10 @@ import InitiativesConfig from '../main/initiatives/InitiativesConfig';
 import EcosystemConfig from '../main/ecosystem/EcosystemConfig';
 import PrivacyPolicyConfig from '../main/privacy-policy/PrivacyPolicyConfig';
 import LogoConfig from '../main/logo/LogoConfig';
+import LatestNewsConfig from '../main/latest-news/LatestNewsConfig';
+import InfoPortalConfig from '../main/info-portal/InfoPortalConfig';
 
-
-const routeConfigs = [LogoConfig, PrivacyPolicyConfig,SocialsConfig,EcosystemConfig, InitiativesConfig, EventsConfig, IncentivesConfig, NewsConfig, AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
+const routeConfigs = [InfoPortalConfig, LatestNewsConfig, LogoConfig, PrivacyPolicyConfig, SocialsConfig, EcosystemConfig, InitiativesConfig, EventsConfig, IncentivesConfig, NewsConfig, AboutConfig, ExampleConfig, SignOutConfig, SignInConfig, SignUpConfig];
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(routeConfigs, settingsConfig.defaultAuth),

@@ -81,6 +81,22 @@ const navigationConfig = [
     url: '/dashboard/socials'
   },
   {
+    id: 'latest-news-component',
+    title: 'Latest News',
+    translate: 'LATESTNEWS',
+    type: 'item',
+    icon: 'heroicons-outline:document',
+    url: '/dashboard/latest-news'
+  },
+  {
+    id: 'info-portal-component',
+    title: 'Info Portal',
+    translate: 'INFOPORTAL',
+    type: 'item',
+    icon: 'heroicons-outline:document',
+    url: '/dashboard/info-portal'
+  },
+  {
     id: 'logo-component',
     title: 'Logo',
     translate: 'LOGO',
