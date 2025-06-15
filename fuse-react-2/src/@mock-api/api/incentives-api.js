@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
-export const getIncentiveContent = async () => {
-    const { data } = await axiosInstance.get("/incentive");
+export const getIncentiveContent = async (page) => {
+    const { data } = await axiosInstance.get(`/incentive?page=${page}`);
     return data;
 }
 

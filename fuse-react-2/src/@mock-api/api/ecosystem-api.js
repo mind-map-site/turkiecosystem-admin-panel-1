@@ -1,8 +1,8 @@
 import axiosInstance from "./axiosInstance";
 
 
-export const getEcosystemContent = async () => {
-    const { data } = await axiosInstance.get("/ecosystem");
+export const getEcosystemContent = async (page) => {
+    const { data } = await axiosInstance.get(`/ecosystem?page=${page}`);
     return data;
 }
 

@@ -1,8 +1,8 @@
 import axiosInstance from "./axiosInstance";
 
-export const getEventsContent = async () => {
-    const { data } = await axiosInstance.get("/event");
-    return data;
+export const getEventsContent = async (page) => {
+    const { data } = await axiosInstance.get(`/event?page=${page}`);
+    return data;   
 }
 
 export const getSingleEventsById = async (id) => {

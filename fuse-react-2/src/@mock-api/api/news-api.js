@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
-export const getNewsContent = async () => {
-    const { data } = await axiosInstance.get("/news");
+export const getNewsContent = async (page) => {
+    const { data } = await axiosInstance.get(`/news?page=${page}`);
     return data;
 }
 
