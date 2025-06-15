@@ -2,6 +2,7 @@ const locale = {
   APPLICATIONS: 'Applications',
   EXAMPLE: 'Example',
   ABOUT: 'About',
+  ADVERTS: 'Adverts',
   LOGO: 'Logo',
   NEWS: 'News',
   INCENTIVES: 'Incentives',

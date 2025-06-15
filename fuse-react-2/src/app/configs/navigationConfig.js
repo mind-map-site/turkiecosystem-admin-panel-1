@@ -9,20 +9,20 @@ i18next.addResourceBundle('ar', 'navigation', ar);
 
 const navigationConfig = [
   {
-    id: 'example-component',
-    title: 'Example',
-    translate: 'EXAMPLE',
+    id: 'about-component',
+    title: 'About',
+    translate: 'ABOUT',
     type: 'item',
-    icon: 'heroicons-outline:star',
-    url: 'example',
+    icon: 'heroicons-outline:information-circle', 
+    url: '/dashboard/about', 
   },
   {
-    id: 'about-component', // New item for about page
-    title: 'About',
-    translate: 'ABOUT', // Make sure to add this in the translation files
+    id: 'adverts-component',
+    title: 'Adverts',
+    translate: 'ADVERTS',
     type: 'item',
-    icon: 'heroicons-outline:information-circle', // Appropriate icon for the About section
-    url: '/dashboard/about', // New URL pointing to about page
+    icon: 'heroicons-outline:', 
+    url: '/dashboard/adverts', 
   },
   {
     id: 'news-component',
@@ -80,14 +80,14 @@ const navigationConfig = [
     icon: 'heroicons-outline:chat',
     url: '/dashboard/socials'
   },
-  {
-    id: 'latest-news-component',
-    title: 'Latest News',
-    translate: 'LATESTNEWS',
-    type: 'item',
-    icon: 'heroicons-outline:document',
-    url: '/dashboard/latest-news'
-  },
+  // {
+  //   id: 'latest-news-component',
+  //   title: 'Latest News',
+  //   translate: 'LATESTNEWS',
+  //   type: 'item',
+  //   icon: 'heroicons-outline:document',
+  //   url: '/dashboard/latest-news'
+  // },
   {
     id: 'info-portal-component',
     title: 'Info Portal',

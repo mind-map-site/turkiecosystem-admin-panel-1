@@ -2,6 +2,7 @@ const locale = {
   APPLICATIONS: 'Programlar',
   EXAMPLE: 'Örnek Sayfa',
   ABOUT: 'Hakkımızda',
+  ADVERTS: 'Adverts',
   LOGO: 'Loqo',
   NEWS: 'Haberler',
   INCENTIVES: 'Teşvikler',
