@@ -1,4 +1,4 @@
-import { object, string } from 'yup';
+import { array, object, string } from 'yup';
 
 export const useLoginValidation = () => {
   return object({
@@ -75,11 +75,11 @@ export const useEcosystemTagsFormValidation = () => {
   return object({
     tagCountry: string(),
     tagProfile: string(),
-    tagIndustry: string(),
+    tagIndustry: array(),
   })
 }
 
-export const ecosystemTagsInitialValues = { tagCountry: "", tagProfile: "", tagIndustry: "" }
+export const ecosystemTagsInitialValues = { tagCountry: "", tagProfile: "", tagIndustry: [] }
 
 
 export const ecosystemTagsFormInputs = [
