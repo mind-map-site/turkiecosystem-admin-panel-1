@@ -19,16 +19,35 @@ const AdminEcosystemFilterData = () => {
 
     const [filterData, setFilterData] = useState(null)
 
-    const handleCreate = async (section) => {
+   const handleCreate = async (section) => {
+    if (section === "industry") {
         setCreatedData({
-            section, values: {
-                en: "",
-                az: "",
-                ru: ""
-            }
+            section,
+            values: [
+                {
+                    en: "",
+                    az: "",
+                    ru: ""
+                }
+            ],
+            allowMultiple: true 
         });
-        setOpenC(true);
+    } else {
+        setCreatedData({
+            section,
+            values: [
+                {
+                    en: "",
+                    az: "",
+                    ru: ""
+                }
+            ],
+            allowMultiple: false
+        });
     }
+    setOpenC(true);
+};
+
 
     useEffect(() => {
         const getEcosystemFilterData = async () => {

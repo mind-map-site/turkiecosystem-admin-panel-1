@@ -17,7 +17,6 @@ const FilterEcosystemTags = () => {
 
     async function onSubmit(values) {
         setIsLoading(true);
-        // console.log(values);
         const res = await filterEcosystem(values.tagCountry, values.tagProfile, values.tagIndustry);
         if (res.data.success) {
             toast.success("Successfully filtered");
@@ -47,17 +46,24 @@ const FilterEcosystemTags = () => {
                             return <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">{input.title}</InputLabel>
                                 <Select
+                                    multiple={input.name === 'tagIndustry'} // only apply multiple for industry
                                     name={input.name}
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={formik.values[input.name]}
                                     label={input.title}
                                     onChange={formik.handleChange}
+                                    renderValue={(selected) =>
+                                        Array.isArray(selected)
+                                            ? selected.map(id => filterData[input.id]?.find(tag => tag.id === id)?.name?.en).join(', ')
+                                            : selected
+                                    }
                                 >
-                                    {filterData[input.id].map(tag => {
-                                        return <MenuItem value={tag?.id}>{tag?.name?.en}</MenuItem>
-                                    })}
-
+                                    {filterData[input.id].map(tag => (
+                                        <MenuItem key={tag.id} value={tag.id}>
+                                            {tag.name?.en}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                             </FormControl>
                         })
@@ -66,8 +72,8 @@ const FilterEcosystemTags = () => {
 
                 <div className='mt-10'>
                     {
-                        (!isLoading && filteredData)? <AdminShowTableData data={filteredData} section="ecosystem" />
-                            :  (!isLoading && !filteredData) ?  null : <MiniLoader />
+                        (!isLoading && filteredData) ? <AdminShowTableData data={filteredData.data} section="ecosystem" pagination={filteredData.pagination}/>
+                            : (!isLoading && !filteredData) ? null : <MiniLoader />
                     }
                 </div>
 
