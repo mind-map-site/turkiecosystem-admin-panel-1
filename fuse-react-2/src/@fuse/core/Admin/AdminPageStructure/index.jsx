@@ -20,10 +20,12 @@ import FilterEcosystemTags from "../Ecosystem/FilterEcosystemTags";
 import AdminSimpleCrudShowTable from "../AdminSimpleCrudShowTable";
 import AdminPrivacyPolicy from "../AdminPrivacyPolicy";
 import AdminShowImage from "../AdminShowImage";
+import AdminShowImages from "../AdminShowImages";
 
 
 const componentMap = {
     "Logo": AdminShowImage,
+    "ShowImages": AdminShowImages,
     "PrivacyPolicy": AdminPrivacyPolicy,
     "SimpleCrudData": AdminSimpleCrudShowTable,
     "ShowAbout": AdminShowContent,
@@ -48,24 +50,35 @@ const AdminPageStructure = ({
     // const { toast } = useToast();
     const [reload, setReload] = useState(0);
     const [content, setContent] = useState(null);
+    const [pagination, setPagination] = useState(null);
     const [selectedAction, setSelectedAction] = useState(actions[0].value);
+    const [page, setPage] = useState(1);
+    const [isOk, setIsOk] = useState(false);
 
     useEffect(() => {
+
         const getAllContent = async () => {
             try {
-                const responseData = await getContentAPI();
+                const responseData = await getContentAPI(page);
+                console.log(responseData);
                 if (responseData) {
-                    setContent(responseData.data);
+                    setContent(responseData.data.data);
+                    setPagination(responseData.data.pagination);
+                    setIsOk(true);
                 } else {
-                    setContent(null);
+                    // setContent(null);
+                    // setPagination(null);
+                    // setIsOk(false);
                 }
             } catch (error) {
-                setContent(null);
+                // setContent(null);
+                // setPagination(null);
+                setIsOk(false);
             }
         };
 
         getAllContent();
-    }, [reload]);
+    }, [reload, page]);
 
     // console.log(content);
     const handleChange = (_, newValue) => {
@@ -92,17 +105,31 @@ const AdminPageStructure = ({
                     ))}
                 </Tabs>
             </Box>
-          
+
 
             <Box sx={{ mt: 2 }}>
-                {content ? (
-                    <SelectedComponent
-                        data={content}
-                        setReload={setReload}
-                        id={content?.id}
+                {(content && selectedAction === "ShowNews") ? <>
+                    <AdminShowTableData
+                    pagination={pagination}
+                        key={`news-show-tab-${page}`}
+                        setPage={setPage}
                         {...selectedActionObject.props}
-                        {...(selectedAction === "AddImg" ? { image: content.images ? content.images[0] : content.image } : {})}
+
                     />
+                </> : content ? (
+                    <>
+                        <SelectedComponent
+                            key={`${selectedAction}-${page}`}
+                            data={content}
+                            getContentApi={getContentAPI}
+                            setTablePage={setPage}
+                            pagination={pagination}
+                            setReload={setReload}
+                            id={content?.id}
+                            {...selectedActionObject.props}
+                            {...(selectedAction === "AddImg" ? { image: content.images ? content.images[0] : content.image } : {})}
+                        />
+                    </>
                 ) : (
                     <MiniLoader />
                 )}
