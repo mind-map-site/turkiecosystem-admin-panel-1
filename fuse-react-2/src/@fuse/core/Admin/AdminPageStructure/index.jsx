@@ -61,7 +61,10 @@ const AdminPageStructure = ({
             try {
                 const responseData = await getContentAPI(page);
                 console.log(responseData);
-                if (responseData) {
+                if(responseData && selectedAction !== "ShowNews"){
+                    setContent(responseData.data);
+                }
+                else if (responseData && selectedAction === "ShowNews") {
                     setContent(responseData.data.data);
                     setPagination(responseData.data.pagination);
                     setIsOk(true);
