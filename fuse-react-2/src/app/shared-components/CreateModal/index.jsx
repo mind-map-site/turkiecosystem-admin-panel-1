@@ -3,8 +3,8 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { postTagCountry, postTagIndustry, postTagProfiles } from 'src/@mock-api/api/ecosystem-api';
-import FilterTextField from '../FilterTextField';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FilterTextField from '../FilterTextField';
 
 const CreateModal = ({ open, setOpen, setReload, createdData, setCreatedData, sectionName }) => {
     const style = {
