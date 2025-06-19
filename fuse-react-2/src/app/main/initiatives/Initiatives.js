@@ -5,6 +5,7 @@ import FusePageSimple from "@fuse/core/FusePageSimple";
 import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
 import { deleteInitiativeContent, deleteInitiativeImage, getInitiativeContent, getSingleInitiativeById, sendInitiativeContent, sendInitiativeImage, updateInitiativeContent } from "src/@mock-api/api/initiative-api";
 import { newsCreateFormInputs, newsFormInitialValues, useNewsFormValidation } from "src/data/formikFieldData";
+import { useEffect, useState } from "react";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-header": {
@@ -21,6 +22,32 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 
 function InitiativesPage(props) {
     const { t } = useTranslation("initiativesPage");
+     const [content, setContent] = useState([])
+    const [page, setPage] = useState(1)
+    const [pagination, setPagination] = useState({})
+    const [reload, setReload] = useState({})
+
+    
+    useEffect(() => {
+
+        const getAllContent = async () => {
+            try {
+                const responseData = await getInitiativeContent(page);
+                if (responseData) {
+                    setContent(responseData.data.data);
+                    setPagination(responseData.data.pagination);
+                } else {
+                    setContent([]);
+
+                }
+            } catch (error) {
+                setContent([]);
+
+            }
+        };
+
+        getAllContent();
+    }, [reload, page]);
 
     return (
         <Root
@@ -33,7 +60,7 @@ function InitiativesPage(props) {
                 <div className="p-24">
                     <AdminPageStructure getContentAPI={getInitiativeContent} description={"Choose an action to perform on the Initiatives Page."} actions={
                         [
-                            { label: "Show Initiatives", value: "ShowNews", props: { getAllData: getInitiativeContent } },
+                            { label: "Show Initiatives", value: "ShowNews", props: { getAllData: getInitiativeContent, data: content, pagination: pagination } },
                             { label: "Show Single Initiative", value: "ShowSingleNews", props: { getSingleData: getSingleInitiativeById } },
                             { label: "Update Initiative", value: "UpdateNews", props: { updateData: updateInitiativeContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "initiative" } },
                             { label: "Create Initiative", value: "CreateNews", props: { createData: sendInitiativeContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "initiative" } },

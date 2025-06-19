@@ -6,6 +6,8 @@ import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
 import { deleteNewsContent, deleteNewsImage, getNewsContent, getSingleNewsById, sendNewsContent, sendNewsImage, updateNewsContent } from "src/@mock-api/api/news-api";
 import { newsCreateFormInputs, newsFormInitialValues, useNewsFormValidation } from "src/data/formikFieldData";
 import { useValidation } from "@mui/x-date-pickers/internals";
+import { useEffect, useState } from "react";
+import AdminShowTableData from "@fuse/core/Admin/AdminShowTableData";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-header": {
@@ -22,6 +24,32 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 
 function NewsPage(props) {
     const { t } = useTranslation("newsPage");
+    const [content, setContent] = useState([])
+    const [page, setPage] = useState(1)
+    const [pagination, setPagination] = useState({})
+    const [reload, setReload] = useState({})
+
+    useEffect(() => {
+
+        const getAllContent = async () => {
+            try {
+                const responseData = await getNewsContent(page);
+                console.log(responseData);
+                if (responseData) {
+                    setContent(responseData.data.data);
+                    setPagination(responseData.data.pagination);
+                } else {
+                    setContent([]);
+
+                }
+            } catch (error) {
+                setContent([]);
+
+            }
+        };
+
+        getAllContent();
+    }, [reload, page]);
 
     return (
         <Root
@@ -32,17 +60,19 @@ function NewsPage(props) {
             }
             content={
                 <div className="p-24">
+
                     <AdminPageStructure getContentAPI={getNewsContent} description={"Choose an action to perform on the News Page."} actions={
                         [
-                            { label: "Show News", value: "ShowNews", props:{getAllData:getNewsContent } },
+                            { label: "Show News", value: "ShowNews", props: { setTablePage: setPage, data: content, pagination: pagination } },
                             { label: "Show Single News", value: "ShowSingleNews", props: { getSingleData: getSingleNewsById } },
-                            { label: "Update News", value: "UpdateNews", props: { updateData: updateNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "news"} },
-                            { label: "Create News", value: "CreateNews", props: { createData: sendNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section:"news" } },
-                            { label: "Delete News", value: "DeleteNews", props:{deleteData: deleteNewsContent}},
-                            { label: "Add Image", value: "AddImg", props:{ addImage:sendNewsImage, section:"news" } },
-                            { label: "Delete Image", value: "DeleteImg", props: {deleteImage:deleteNewsImage} }
+                            { label: "Update News", value: "UpdateNews", props: { updateData: updateNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "news" } },
+                            { label: "Create News", value: "CreateNews", props: { createData: sendNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "news" } },
+                            { label: "Delete News", value: "DeleteNews", props: { deleteData: deleteNewsContent } },
+                            { label: "Add Image", value: "AddImg", props: { addImage: sendNewsImage, section: "news" } },
+                            { label: "Delete Image", value: "DeleteImg", props: { deleteImage: deleteNewsImage } }
                         ]
                     } />
+
                 </div>
             }
             scroll="content"

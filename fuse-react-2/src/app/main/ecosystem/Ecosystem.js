@@ -5,6 +5,8 @@ import FusePageSimple from "@fuse/core/FusePageSimple";
 import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
 import { deleteEcosystemContent, deleteEcosystemImage, getEcosystemContent, getSingleEcosystemById, sendEcosystemContent, sendEcosystemImage, updateEcosystemContent } from "src/@mock-api/api/ecosystem-api";
 import { ecosystemCreateFormInputs, ecosystemFormInitialValues, newsCreateFormInputs, useEcosystemFormValidation } from "src/data/formikFieldData";
+import { useEffect, useState } from "react";
+
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-header": {
@@ -19,9 +21,35 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-sidebarContent": {},
 }));
 
-function AboutPage(props) {
-    const { t } = useTranslation("ecosystemPage");
 
+
+  function AboutPage(props) {
+    const { t } = useTranslation("ecosystemPage");
+ const [content, setContent] = useState([])
+    const [page, setPage] = useState(1)
+    const [pagination, setPagination] = useState({})
+    const [reload, setReload] = useState({})
+    
+    useEffect(() => {
+
+        const getAllContent = async () => {
+            try {
+                const responseData = await getEcosystemContent(page);
+                if (responseData) {
+                    setContent(responseData.data.data);
+                    setPagination(responseData.data.pagination);
+                } else {
+                    setContent([]);
+
+                }
+            } catch (error) {
+                setContent([]);
+
+            }
+        };
+
+        getAllContent();
+    }, [reload, page]);
     return (
         <Root
             header={
@@ -33,7 +61,7 @@ function AboutPage(props) {
                 <div className="p-24">
                     <AdminPageStructure getContentAPI={getEcosystemContent} description={"Choose an action to perform on the Ecosystems Page."} actions={
                         [
-                            { label: "Show Ecosystems", value: "ShowNews", props: { getAllData: getEcosystemContent, section: "ecosystem" } },
+                            { label: "Show Ecosystems", value: "ShowNews", props: { getAllData: getEcosystemContent, section: "ecosystem", data: content, pagination: pagination } },
                             { label: "Show Single Ecosystem", value: "ShowSingleNews", props: { getSingleData: getSingleEcosystemById, section:"ecosystem" } },
                             { label: "Update Ecosystem", value: "UpdateNews", props: { updateData: updateEcosystemContent, inputs: ecosystemCreateFormInputs, useValidation: useEcosystemFormValidation, initialValues: ecosystemFormInitialValues, section: "ecosystem" } },
                             { label: "Create Ecosystem", value: "CreateNews", props: { createData: sendEcosystemContent, inputs: ecosystemCreateFormInputs, useValidation: useEcosystemFormValidation, initialValues: ecosystemFormInitialValues, section: "ecosystem" } },

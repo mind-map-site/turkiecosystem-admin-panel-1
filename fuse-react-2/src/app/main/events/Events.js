@@ -5,6 +5,7 @@ import FusePageSimple from "@fuse/core/FusePageSimple";
 import { deleteEventsContent, deleteEventsImage, getEventsContent, getSingleEventsById, sendEventsContent, sendEventsImage, updateEventsContent } from "src/@mock-api/api/events-api";
 import { newsCreateFormInputs, newsFormInitialValues, useNewsFormValidation } from "src/data/formikFieldData";
 import AdminPageStructure from "@fuse/core/Admin/AdminPageStructure";
+import { useEffect, useState } from "react";
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
     "& .FusePageSimple-header": {
@@ -21,6 +22,31 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 
 function EventsPage(props) {
     const { t } = useTranslation("eventsPage");
+        const [content, setContent] = useState([])
+        const [page, setPage] = useState(1)
+        const [pagination, setPagination] = useState({})
+        const [reload, setReload] = useState({})
+    
+        useEffect(() => {
+    
+            const getAllContent = async () => {
+                try {
+                    const responseData = await getEventsContent(page);
+                    if (responseData) {
+                        setContent(responseData.data.data);
+                        setPagination(responseData.data.pagination);
+                    } else {
+                        setContent([]);
+    
+                    }
+                } catch (error) {
+                    setContent([]);
+    
+                }
+            };
+    
+            getAllContent();
+        }, [reload, page]);
 
     return (
         <Root
@@ -33,7 +59,7 @@ function EventsPage(props) {
                 <div className="p-24">
                     <AdminPageStructure getContentAPI={getEventsContent} description={"Choose an action to perform on the Events Page."} actions={
                         [
-                            { label: "Show Events", value: "ShowNews", props:{getAllData:getEventsContent } },
+                            { label: "Show Events", value: "ShowNews", props:{getAllData:getEventsContent,data: content, pagination: pagination } },
                             { label: "Show Single Events", value: "ShowSingleNews", props: { getSingleData: getSingleEventsById } },
                             { label: "Update Events", value: "UpdateNews", props: { updateData: updateEventsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "events"} },
                             { label: "Create Events", value: "CreateNews", props: { createData: sendEventsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section:"events" } },
