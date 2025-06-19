@@ -60,7 +60,7 @@ function InitiativesPage(props) {
                 <div className="p-24">
                     <AdminPageStructure getContentAPI={getInitiativeContent} description={"Choose an action to perform on the Initiatives Page."} actions={
                         [
-                            { label: "Show Initiatives", value: "ShowNews", props: { getAllData: getInitiativeContent, data: content, pagination: pagination } },
+                            { label: "Show Initiatives", value: "ShowNews", props: { getAllData: getInitiativeContent, data: content, pagination } },
                             { label: "Show Single Initiative", value: "ShowSingleNews", props: { getSingleData: getSingleInitiativeById } },
                             { label: "Update Initiative", value: "UpdateNews", props: { updateData: updateInitiativeContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "initiative" } },
                             { label: "Create Initiative", value: "CreateNews", props: { createData: sendInitiativeContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "initiative" } },

@@ -63,7 +63,7 @@ function NewsPage(props) {
 
                     <AdminPageStructure getContentAPI={getNewsContent} description={"Choose an action to perform on the News Page."} actions={
                         [
-                            { label: "Show News", value: "ShowNews", props: { setTablePage: setPage, data: content, pagination: pagination } },
+                            { label: "Show News", value: "ShowNews", props: { setTablePage: setPage, data: content, pagination } },
                             { label: "Show Single News", value: "ShowSingleNews", props: { getSingleData: getSingleNewsById } },
                             { label: "Update News", value: "UpdateNews", props: { updateData: updateNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "news" } },
                             { label: "Create News", value: "CreateNews", props: { createData: sendNewsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "news" } },

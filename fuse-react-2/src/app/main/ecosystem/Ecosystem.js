@@ -61,7 +61,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
                 <div className="p-24">
                     <AdminPageStructure getContentAPI={getEcosystemContent} description={"Choose an action to perform on the Ecosystems Page."} actions={
                         [
-                            { label: "Show Ecosystems", value: "ShowNews", props: { getAllData: getEcosystemContent, section: "ecosystem", data: content, pagination: pagination } },
+                            { label: "Show Ecosystems", value: "ShowNews", props: { getAllData: getEcosystemContent, section: "ecosystem", data: content, pagination } },
                             { label: "Show Single Ecosystem", value: "ShowSingleNews", props: { getSingleData: getSingleEcosystemById, section:"ecosystem" } },
                             { label: "Update Ecosystem", value: "UpdateNews", props: { updateData: updateEcosystemContent, inputs: ecosystemCreateFormInputs, useValidation: useEcosystemFormValidation, initialValues: ecosystemFormInitialValues, section: "ecosystem" } },
                             { label: "Create Ecosystem", value: "CreateNews", props: { createData: sendEcosystemContent, inputs: ecosystemCreateFormInputs, useValidation: useEcosystemFormValidation, initialValues: ecosystemFormInitialValues, section: "ecosystem" } },

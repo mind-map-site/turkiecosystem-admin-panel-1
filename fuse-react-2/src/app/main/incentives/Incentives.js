@@ -62,7 +62,7 @@ function IncentivesPage(props) {
                 <div className="p-24">
                     <AdminPageStructure getContentAPI={getIncentiveContent} description={"Choose an action to perform on the Incentives Page."} actions={
                         [
-                            { label: "Show Incentives", value: "ShowNews", props: { getAllData: getIncentiveContent, data: content, pagination: pagination } },
+                            { label: "Show Incentives", value: "ShowNews", props: { getAllData: getIncentiveContent, data: content, pagination } },
                             { label: "Show Single Incentive", value: "ShowSingleNews", props: { getSingleData: getSingleIncentiveById } },
                             { label: "Update Incentive", value: "UpdateNews", props: { updateData: updateIncentiveContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "incentive" } },
                             { label: "Create Incentive", value: "CreateNews", props: { createData: sendIncentiveContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "incentive" } },

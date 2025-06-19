@@ -59,7 +59,7 @@ function EventsPage(props) {
                 <div className="p-24">
                     <AdminPageStructure getContentAPI={getEventsContent} description={"Choose an action to perform on the Events Page."} actions={
                         [
-                            { label: "Show Events", value: "ShowNews", props:{getAllData:getEventsContent,data: content, pagination: pagination } },
+                            { label: "Show Events", value: "ShowNews", props:{getAllData:getEventsContent,data: content, pagination } },
                             { label: "Show Single Events", value: "ShowSingleNews", props: { getSingleData: getSingleEventsById } },
                             { label: "Update Events", value: "UpdateNews", props: { updateData: updateEventsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section: "events"} },
                             { label: "Create Events", value: "CreateNews", props: { createData: sendEventsContent, inputs: newsCreateFormInputs, useValidation: useNewsFormValidation, initialValues: newsFormInitialValues, section:"events" } },
