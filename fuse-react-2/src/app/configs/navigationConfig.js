@@ -21,7 +21,7 @@ const navigationConfig = [
     title: 'Adverts',
     translate: 'ADVERTS',
     type: 'item',
-    icon: 'heroicons-outline:', 
+    icon: 'heroicons-outline:document', 
     url: '/dashboard/adverts', 
   },
   {
