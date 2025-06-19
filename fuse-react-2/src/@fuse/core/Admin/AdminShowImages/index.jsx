@@ -15,6 +15,8 @@ import {
 const AdminShowImages = ({data, section, setReload}) => {
     console.log(data, section);
   return (
+    <>
+  <Typography variant="body2" color={"error"}>The images should be in approximately 800 x 400 resolution.</Typography>
  <TableContainer component={Paper} elevation={2}>
       <Table>
         <TableHead>
@@ -51,7 +53,9 @@ const AdminShowImages = ({data, section, setReload}) => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>  )
+    </TableContainer>  
+          </>
+    )
 }
 
 export default AdminShowImages
