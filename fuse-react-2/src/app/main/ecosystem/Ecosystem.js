@@ -23,13 +23,13 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 
 
 
-  function AboutPage(props) {
+function AboutPage(props) {
     const { t } = useTranslation("ecosystemPage");
- const [content, setContent] = useState([])
+    const [content, setContent] = useState([])
     const [page, setPage] = useState(1)
     const [pagination, setPagination] = useState({})
     const [reload, setReload] = useState({})
-    
+
     useEffect(() => {
 
         const getAllContent = async () => {
@@ -62,7 +62,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
                     <AdminPageStructure getContentAPI={getEcosystemContent} description={"Choose an action to perform on the Ecosystems Page."} actions={
                         [
                             { label: "Show Ecosystems", value: "ShowNews", props: { getAllData: getEcosystemContent, section: "ecosystem", data: content, pagination } },
-                            { label: "Show Single Ecosystem", value: "ShowSingleNews", props: { getSingleData: getSingleEcosystemById, section:"ecosystem" } },
+                            { label: "Show Single Ecosystem", value: "ShowSingleNews", props: { getSingleData: getSingleEcosystemById, section: "ecosystem" } },
                             { label: "Update Ecosystem", value: "UpdateNews", props: { updateData: updateEcosystemContent, inputs: ecosystemCreateFormInputs, useValidation: useEcosystemFormValidation, initialValues: ecosystemFormInitialValues, section: "ecosystem" } },
                             { label: "Create Ecosystem", value: "CreateNews", props: { createData: sendEcosystemContent, inputs: ecosystemCreateFormInputs, useValidation: useEcosystemFormValidation, initialValues: ecosystemFormInitialValues, section: "ecosystem" } },
                             { label: "Delete Ecosystem", value: "DeleteNews", props: { deleteData: deleteEcosystemContent } },
