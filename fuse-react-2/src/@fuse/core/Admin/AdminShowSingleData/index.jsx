@@ -73,7 +73,7 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                 </AccordionDetails>
                             </Accordion>
 
-                            <Accordion>
+                            {/* <Accordion>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                     Russian
                                 </AccordionSummary>
@@ -101,7 +101,7 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                         InputProps={{ readOnly: true }}
                                     />
                                 </AccordionDetails>
-                            </Accordion>
+                            </Accordion> */}
                         </CardContent>
                     </Card>
 
@@ -129,7 +129,7 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                 </AccordionDetails>
                             </Accordion>
 
-                            <Accordion>
+                            {/* <Accordion>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                     Russian
                                 </AccordionSummary>
@@ -157,7 +157,7 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                         InputProps={{ readOnly: true }}
                                     />
                                 </AccordionDetails>
-                            </Accordion>
+                            </Accordion> */}
                         </CardContent>
                     </Card>
 
@@ -320,7 +320,7 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                     </AccordionDetails>
                                 </Accordion>
 
-                                <Accordion>
+                                {/* <Accordion>
                                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                         Russian
                                     </AccordionSummary>
@@ -333,9 +333,9 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                             InputProps={{ readOnly: true }}
                                         />
                                     </AccordionDetails>
-                                </Accordion>
+                                </Accordion> */}
 
-                                <Accordion>
+                                {/* <Accordion>
                                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                         Azerbaijani
                                     </AccordionSummary>
@@ -348,65 +348,44 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                             InputProps={{ readOnly: true }}
                                         />
                                     </AccordionDetails>
-                                </Accordion>
+                                </Accordion> */}
                             </CardContent>
                         </Card>
 
-                        <Box className="p-2 mt-6">
-                            <h5 className="text-lg font-semibold">Tag Industry</h5>
-                            <p className="text-sm">
-                                Your Tag Industry is available in three different languages.
-                            </p>
-                        </Box>
+                     <Box className="p-2 mt-6">
+  <h5 className="text-lg font-semibold">Tag Industry</h5>
+  <p className="text-sm">
+    Your Tag Industry is available in three different languages.
+  </p>
+</Box>
 
-                        <Card className="">
-                            <CardContent className="space-y-2">
-                                <Accordion>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        English
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <TextField
-                                            multiline
-                                            rows={6}
-                                            fullWidth
-                                            value={singleData?.tagIndustry?.name.en}
-                                            InputProps={{ readOnly: true }}
-                                        />
-                                    </AccordionDetails>
-                                </Accordion>
-
-                                <Accordion>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        Russian
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <TextField
-                                            multiline
-                                            rows={6}
-                                            fullWidth
-                                            value={singleData?.tagIndustry?.name.ru}
-                                            InputProps={{ readOnly: true }}
-                                        />
-                                    </AccordionDetails>
-                                </Accordion>
-
-                                <Accordion>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        Azerbaijani
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <TextField
-                                            multiline
-                                            rows={6}
-                                            fullWidth
-                                            value={singleData?.tagIndustry?.name.az}
-                                            InputProps={{ readOnly: true }}
-                                        />
-                                    </AccordionDetails>
-                                </Accordion>
-                            </CardContent>
-                        </Card>
+<Card className="">
+  <CardContent className="space-y-2">
+    {["en"].map((lang) => (
+      <Accordion key={lang}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        English
+          {/* {lang === "en" ? "English" : lang === "ru" ? "Russian" : "Azerbaijani"} */}
+        </AccordionSummary>
+        <AccordionDetails>
+          <TextField
+            multiline
+            rows={6}
+            fullWidth
+            InputProps={{ readOnly: true }}
+            value={
+              singleData?.tagIndustry?.length
+                ? singleData.tagIndustry
+                    .map((industry) => industry.name?.en || "-")
+                    .join(", ")
+                : "No industries selected"
+            }
+          />
+        </AccordionDetails>
+      </Accordion>
+    ))}
+  </CardContent>
+</Card>
 
                         <Box className="p-2 mt-6">
                             <h5 className="text-lg font-semibold">Tag Profile</h5>
@@ -432,7 +411,7 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                     </AccordionDetails>
                                 </Accordion>
 
-                                <Accordion>
+                                {/* <Accordion>
                                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                         Russian
                                     </AccordionSummary>
@@ -460,7 +439,7 @@ const AdminShowSingleData = ({ getSingleData, data, section }) => {
                                             InputProps={{ readOnly: true }}
                                         />
                                     </AccordionDetails>
-                                </Accordion>
+                                </Accordion> */}
                             </CardContent>
                         </Card>
 
