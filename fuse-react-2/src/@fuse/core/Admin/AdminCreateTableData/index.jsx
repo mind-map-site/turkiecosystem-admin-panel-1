@@ -16,6 +16,7 @@ import {
     InputLabel,
     Select,
     MenuItem,
+    Checkbox,
 } from '@mui/material';
 import { getFilterData } from 'src/@mock-api/api/ecosystem-api';
 
@@ -138,7 +139,7 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                             </AccordionDetails>
                                         </Accordion>
 
-                                        <Accordion>
+                                        {/* <Accordion>
                                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                                 Russian
                                             </AccordionSummary>
@@ -155,9 +156,9 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     helperText={formik.touched[`${name}Ru`] && formik.errors[`${name}Ru`]}
                                                 />
                                             </AccordionDetails>
-                                        </Accordion>
+                                        </Accordion> */}
 
-                                        <Accordion>
+                                        {/* <Accordion>
                                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                                 Azerbaijani
                                             </AccordionSummary>
@@ -174,26 +175,49 @@ const AdminCreateTableData = ({ setReload, createData, initialValues, useValidat
                                                     helperText={formik.touched[`${name}Az`] && formik.errors[`${name}Az`]}
                                                 />
                                             </AccordionDetails>
-                                        </Accordion>
+                                        </Accordion> */}
                                     </CardContent>
                                 </Card> :
                                 (type === "select" && filterData) ?
                                     <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select-label">{title}</InputLabel>
+                                        <InputLabel id={`label-${name}`}>{title}</InputLabel>
                                         <Select
                                             name={name}
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
+                                            labelId={`label-${name}`}
+                                            id={`select-${name}`}
                                             value={formik.values[name]}
                                             label={title}
                                             onChange={formik.handleChange}
+                                            multiple={name === "tagIndustry"} 
+                                            renderValue={(selected) =>
+                                                name === "tagIndustry"
+                                                    ? filterData[id]
+                                                        .filter(tag => selected.includes(tag.id))
+                                                        .map(tag => tag.name?.en)
+                                                        .join(', ')
+                                                    : filterData[id]?.find(tag => tag.id === selected)?.name?.en || ""
+                                            }
                                         >
-                                            {filterData[id].map(tag => {
-                                                return <MenuItem value={tag?.id}>{tag?.name?.en}</MenuItem>
-                                            })}
+                                            {filterData[id].map((tag) => {
+                                                const isMulti = name === "tagIndustry";
+                                                const selected = formik.values[name];
 
+                                                return (
+                                                    <MenuItem key={tag?.id} value={tag?.id}>
+                                                        {isMulti ? (
+                                                            <>
+                                                                <Checkbox checked={selected.includes(tag.id)} />
+                                                                {tag?.name?.en}
+                                                            </>
+                                                        ) : (
+                                                            tag?.name?.en
+                                                        )}
+                                                    </MenuItem>
+                                                );
+                                            })}
                                         </Select>
                                     </FormControl>
+
                                     : null
                             }
 
