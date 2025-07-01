@@ -55,11 +55,11 @@ export const useEcosystemFormValidation = () => {
       .min(10, 'Text must be at least 10 characters long.'),
     tagCountry: string().required("Tag Country is required"),
     tagProfile: string().required("Tag Profile is required"),
-    tagIndustry: string().required("Tag Industry is required"),
+    tagIndustry: array(),
   })
 }
 
-export const ecosystemFormInitialValues = { titleEn: '', titleRu: '', titleAz: '', descriptionEn: '', descriptionRu: '', descriptionAz: '', tagCountry: "", tagProfile: "", tagIndustry: "" }
+export const ecosystemFormInitialValues = { titleEn: '', titleRu: '', titleAz: '', descriptionEn: '', descriptionRu: '', descriptionAz: '', tagCountry: "", tagProfile: "", tagIndustry: [] }
 
 export const ecosystemCreateFormInputs = [
   { title: "Title", description: "You can update or create title in three different languages (EN, AZ, RU).", type: "text", isLang: true, id: "title", name: "title" },
