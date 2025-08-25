@@ -107,7 +107,7 @@
         "util": "^0.12.4"
     },
     "scripts": {
-        "start": "react-app-rewired start -7788",
+        "start": "react-app-rewired start -p 7788",
         "build": "cross-env GENERATE_SOURCEMAP=false react-app-rewired build",
         "test": "react-app-rewired test --env=node",
         "eject": "react-app-rewired eject",
