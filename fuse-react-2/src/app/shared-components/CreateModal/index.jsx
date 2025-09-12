@@ -69,7 +69,6 @@ const CreateModal = ({ open, setOpen, setReload, createdData, setCreatedData, se
                 "name.ru": createdData.values[0].ru,
                 "name.az": createdData.values[0].az
             };
-                console.log("it is my sended data",sendedData);
 
             let res = null;
             if (createdData.section === "profile") {
