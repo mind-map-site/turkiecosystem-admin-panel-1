@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 console.log(BASE_URL);
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "https://api.turkiccluster.com/api/v1",
 });
 // eslint-disable-next-line no-unused-expressions
 axiosInstance.interceptors.request.use((config) => {
