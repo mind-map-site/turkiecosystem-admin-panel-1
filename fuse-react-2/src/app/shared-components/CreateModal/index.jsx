@@ -43,8 +43,10 @@ const CreateModal = ({ open, setOpen, setReload, createdData, setCreatedData, se
     };
 
   const handleSubmitCreate = async () => {
+    
     try {
         if (createdData.section === "industry") {
+            
             const sendedArray = createdData.values.map(item => ({
                 "name.en": item.en,
                 "name.ru": item.ru,
@@ -60,12 +62,14 @@ const CreateModal = ({ open, setOpen, setReload, createdData, setCreatedData, se
                 toast.error(`Failed to create your ${sectionName}(s)`);
             }
         } else {
+            
             // for profile & country: send single object
             const sendedData = {
-                "name.en": createdData.values.en,
-                "name.ru": createdData.values.ru,
-                "name.az": createdData.values.az
+                "name.en": createdData.values[0].en,
+                "name.ru": createdData.values[0].ru,
+                "name.az": createdData.values[0].az
             };
+                console.log("it is my sended data",sendedData);
 
             let res = null;
             if (createdData.section === "profile") {
