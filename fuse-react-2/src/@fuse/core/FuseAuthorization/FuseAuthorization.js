@@ -1,11 +1,11 @@
-import FuseUtils from '@fuse/utils';
-import AppContext from 'app/AppContext';
-import { Component } from 'react';
-import { matchRoutes } from 'react-router-dom';
-import withRouter from '@fuse/core/withRouter';
-import history from '@history';
+import FuseUtils from "@fuse/utils";
+import AppContext from "app/AppContext";
+import { Component } from "react";
+import { matchRoutes } from "react-router-dom";
+import withRouter from "@fuse/core/withRouter";
+import history from "@history";
 
-let loginRedirectUrl = null;
+const loginRedirectUrl = null;
 
 class FuseAuthorization extends Component {
   constructor(props, context) {
@@ -13,15 +13,13 @@ class FuseAuthorization extends Component {
     const { routes } = context;
     this.state = {
       accessGranted: true,
-      routes,
+      // routes,
     };
-    this.defaultLoginRedirectUrl = props.loginRedirectUrl || '/';
+    this.defaultLoginRedirectUrl = props.loginRedirectUrl || "/";
   }
 
   componentDidMount() {
-    if (!this.state.accessGranted) {
-      this.redirectRoute();
-    }
+    this.checkAccess();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -34,44 +32,67 @@ class FuseAuthorization extends Component {
     }
   }
 
-  static getDerivedStateFromProps(props, state) {
-    const { location, userRole } = props;
-    const { pathname } = location;
-
-    const matchedRoutes = matchRoutes(state.routes, pathname);
-
-    const matched = matchedRoutes ? matchedRoutes[0] : false;
-    return {
-      accessGranted: matched ? FuseUtils.hasPermission(matched.route.auth, userRole) : true,
-    };
+  checkAccess() {
+    if (typeof window !== "undefined") {
+      const token = JSON.parse(localStorage.getItem("accessToken"));
+      this.setState({ accessGranted: !!token }); // true if token exists, false otherwise
+    }
   }
 
-  redirectRoute() {
-    const { location, userRole } = this.props;
-    const { pathname } = location;
-    const redirectUrl = loginRedirectUrl || this.defaultLoginRedirectUrl;
+  // static getDerivedStateFromProps(props, state) {
+  //   const { location, userRole } = props;
+  //   const { pathname } = location;
 
-    /*
-        User is guest
-        Redirect to Login Page
-        */
-    if (!userRole || userRole.length === 0) {
-      setTimeout(() => history.push('/sign-in'), 0);
-      loginRedirectUrl = pathname;
-    } else {
-      /*
-        User is member
-        User must be on unAuthorized page or just logged in
-        Redirect to dashboard or loginRedirectUrl
-        */
-      setTimeout(() => history.push(redirectUrl), 0);
-      loginRedirectUrl = this.defaultLoginRedirectUrl;
+  //   const matchedRoutes = matchRoutes(state.routes, pathname);
+
+  //   const matched = matchedRoutes ? matchedRoutes[0] : false;
+  //   return {
+  //     accessGranted: matched
+  //       ? FuseUtils.hasPermission(matched.route.auth, userRole)
+  //       : true,
+  //   };
+  // }
+
+  redirectRoute() {
+    if (!this.state.accessGranted) {
+      history.push("/sign-in");
     }
+    //  const { location, userRole } = this.props;
+    //   const { pathname } = location;
+    //   const redirectUrl = loginRedirectUrl || this.defaultLoginRedirectUrl;
+    //   console.log(pathname);
+    //   cons ole.log(this.state.accessGranted);
+
+    //   if (typeof window !== "undefined") {
+    //     const token = JSON.parse(localStorage.getItem("accessToken"));
+
+    //     if (!token) {
+    //       history.push("/sign-in");
+    //     }
+    //   }
+
+    // setTimeout(() => history.push("dashboard/about"), 0);
+
+    // User is guest
+    // Redirect to Login Page
+    // */
+    //  if (!userRole || userRole.length === 0) {
+    //    setTimeout(() => history.push('/sign-in'), 0);
+    //    loginRedirectUrl = pathname;
+    //  } else {
+
+    // User is member
+    // User mus8t be on unAuthorized page or just logged in
+    // Redirect to dashboard or loginRedirectUrl
+    // */
+    //  setTimeout(() => history.push(redirectUrl), 0);
+    //  loginRedirectUrl = this.defaultLoginRedirectUrl;
+    //  }
   }
 
   render() {
     // console.info('Fuse Authorization rendered', this.state.accessGranted);
-    return this.state.accessGranted ? <>{this.props.children}</> : null;
+    return <>{this.props.children}</>;
   }
 }
 

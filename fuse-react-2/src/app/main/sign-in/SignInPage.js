@@ -1,67 +1,104 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
-import * as yup from 'yup';
-import _ from '@lodash';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import { useEffect } from 'react';
-import jwtService from '../../auth/services/jwtService';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Link, useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import _ from "@lodash";
+import FuseSvgIcon from "@fuse/core/FuseSvgIcon";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import axios from "axios";
 
 /**
  * Form Validation Schema
  */
 const schema = yup.object().shape({
-  email: yup.string().email('You must enter a valid email').required('You must enter a email'),
+  email: yup
+    .string()
+    .email("You must enter a valid email")
+    .required("You must enter a email"),
   password: yup
     .string()
-    .required('Please enter your password.')
-    .min(4, 'Password is too short - must be at least 4 chars.'),
+    .required("Please enter your password.")
+    .min(4, "Password is too short - must be at least 4 chars."),
 });
 
 const defaultValues = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
   remember: true,
 };
 
 function SignInPage() {
   const { control, formState, handleSubmit, setError, setValue } = useForm({
-    mode: 'onChange',
+    mode: "onChange",
     defaultValues,
     resolver: yupResolver(schema),
   });
 
   const { isValid, dirtyFields, errors } = formState;
+  const navigator = useNavigate();
 
-  useEffect(() => {
-    setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
-    setValue('password', '@#admin@#!@', { shouldDirty: true, shouldValidate: true });
-  }, [setValue]);
+  // useEffect(() => {
+  //   setValue("email", "admin@fusetheme.com", {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  //   setValue("password", "@#admin@#!@", {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   });
+  // }, [setValue]);
 
   function onSubmit({ email, password }) {
-    jwtService
-      .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        // No need to do anything, user data will be set at app/auth/AuthContext
-      })
-      .catch((_errors) => {
-        _errors.forEach((error) => {
-          setError(error.type, {
-            type: 'manual',
-            message: error.message,
-          });
-        });
-      });
+    const payload = {
+      email,
+      password,
+    };
+    async function loginUser() {
+      const res = await axios.post(
+        "https://api.mindmap.az/api/v1/auth/login",
+        payload
+      );
+
+      console.log("sagol");
+      if (res.status === 200) {
+        console.log("salam");
+
+        navigator("/dashboard/about");
+        if (typeof window !== "undefined") {
+          localStorage.setItem(
+            "accessToken",
+            JSON.stringify(res.data.data.token.access)
+          );
+        }
+      }
+    }
+
+    loginUser();
+
+    // jwtService
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then((user) => {
+    //     console.log("user");
+
+    //     // No need to do anything, user data will be set at app/auth/AuthContext
+    //   })
+    //   .catch((_errors) => {
+    //     _errors.forEach((error) => {
+    //       setError(error.type, {
+    //         type: "manual",
+    //         message: error.message,
+    //       });
+    //     });
+    //   });
   }
 
   return (
@@ -73,12 +110,12 @@ function SignInPage() {
           <Typography className="mt-32 text-4xl font-extrabold tracking-tight leading-tight">
             Sign in
           </Typography>
-          <div className="flex items-baseline mt-2 font-medium">
+          {/* <div className="flex items-baseline mt-2 font-medium">
             <Typography>Don't have an account?</Typography>
             <Link className="ml-4" to="/sign-up">
               Sign up
             </Link>
-          </div>
+          </div> */}
 
           <form
             name="loginForm"
@@ -123,8 +160,8 @@ function SignInPage() {
               )}
             />
 
-            <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between">
-              <Controller
+            {/* <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between"> */}
+              {/* <Controller
                 name="remember"
                 control={control}
                 render={({ field }) => (
@@ -137,10 +174,13 @@ function SignInPage() {
                 )}
               />
 
-              <Link className="text-md font-medium" to="/pages/auth/forgot-password">
+              <Link
+                className="text-md font-medium"
+                to="/pages/auth/forgot-password"
+              >
                 Forgot password?
-              </Link>
-            </div>
+              </Link> */}
+            {/* </div> */}
 
             <Button
               variant="contained"
@@ -154,15 +194,15 @@ function SignInPage() {
               Sign in
             </Button>
 
-            <div className="flex items-center mt-32">
+            {/* <div className="flex items-center mt-32">
               <div className="flex-auto mt-px border-t" />
               <Typography className="mx-8" color="text.secondary">
                 Or continue with
               </Typography>
               <div className="flex-auto mt-px border-t" />
-            </div>
+            </div> */}
 
-            <div className="flex items-center mt-32 space-x-16">
+            {/* <div className="flex items-center mt-32 space-x-16">
               <Button variant="outlined" className="flex-auto">
                 <FuseSvgIcon size={20} color="action">
                   feather:facebook
@@ -178,14 +218,14 @@ function SignInPage() {
                   feather:github
                 </FuseSvgIcon>
               </Button>
-            </div>
+            </div> */}
           </form>
         </div>
       </Paper>
 
       <Box
         className="relative hidden md:flex flex-auto items-center justify-center h-full p-64 lg:px-112 overflow-hidden"
-        sx={{ backgroundColor: 'primary.main' }}
+        sx={{ backgroundColor: "primary.main" }}
       >
         <svg
           className="absolute inset-0 pointer-events-none"
@@ -197,7 +237,7 @@ function SignInPage() {
         >
           <Box
             component="g"
-            sx={{ color: 'primary.light' }}
+            sx={{ color: "primary.light" }}
             className="opacity-20"
             fill="none"
             stroke="currentColor"
@@ -210,7 +250,7 @@ function SignInPage() {
         <Box
           component="svg"
           className="absolute -top-64 -right-64 opacity-20"
-          sx={{ color: 'primary.light' }}
+          sx={{ color: "primary.light" }}
           viewBox="0 0 220 192"
           width="220px"
           height="192px"
@@ -228,7 +268,11 @@ function SignInPage() {
               <rect x="0" y="0" width="4" height="4" fill="currentColor" />
             </pattern>
           </defs>
-          <rect width="220" height="192" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)" />
+          <rect
+            width="220"
+            height="192"
+            fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"
+          />
         </Box>
 
         <div className="z-10 relative w-full max-w-2xl">
@@ -237,14 +281,15 @@ function SignInPage() {
             <div>our community</div>
           </div>
           <div className="mt-24 text-lg tracking-tight leading-6 text-gray-400">
-            Fuse helps developers to build organized and well coded dashboards full of beautiful and
-            rich modules. Join us and start building your application today.
+            Fuse helps developers to build organized and well coded dashboards
+            full of beautiful and rich modules. Join us and start building your
+            application today.
           </div>
           <div className="flex items-center mt-32">
             <AvatarGroup
               sx={{
-                '& .MuiAvatar-root': {
-                  borderColor: 'primary.main',
+                "& .MuiAvatar-root": {
+                  borderColor: "primary.main",
                 },
               }}
             >

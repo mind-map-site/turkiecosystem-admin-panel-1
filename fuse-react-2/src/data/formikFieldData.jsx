@@ -254,9 +254,9 @@ export const useLatestNewsForm = () => {
 export const useInfoPortalForm = () => {
   return {
     validation: object({
-      websiteName: string().min(5).max(100),
-      infoDescription: string().min(5).max(500),
-      copyrightMessage: string().min(5).max(300),
+      websiteName: string().min(5).max(200),
+      infoDescription: string().min(5).max(3500),
+      copyrightMessage: string().min(5).max(500),
     }),
     initialValues: {
       websiteName: "",
