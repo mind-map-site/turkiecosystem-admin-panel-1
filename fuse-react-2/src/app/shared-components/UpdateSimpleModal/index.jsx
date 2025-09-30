@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import useFormikForm from 'src/hooks/use-formik-form';
 
 const UpdateSimpleModal = ({ open, setOpen, singleGetApi, updateId, updateData, handleUpdate, useDataForm, isFullCrud }) => {
-    console.log(open);
     const { validation, initialValues, inputs } = useDataForm();
     const formik = useFormikForm(initialValues, validation, onSubmit);
 

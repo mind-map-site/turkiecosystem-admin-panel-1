@@ -19,7 +19,6 @@ const CrudTable = ({ title, data = [], setUpdateId, setUpdateData, onDelete, set
     }
 
     function handleUpdateData(updatedData_) {
-        console.log(updatedData_)
         setUpdateData(updatedData_);
         setOpenU(true);
     }
