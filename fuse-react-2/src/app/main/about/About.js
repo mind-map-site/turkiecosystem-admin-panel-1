@@ -33,7 +33,7 @@ function AboutPage(props) {
                     <AdminPageStructure getContentAPI={getAboutContent} description={"Choose an action to perform on the About Page."} actions={
                         [
                             { label: "Show About Data", value: "ShowAbout" },
-                            { label: "Define or Update Content", value: "DefineUpdateAbout" },
+                            { label: "Define or Update Content and Link", value: "DefineUpdateAbout" },
                             { label: "Add Image", value: "AddImg", props: { addImage: sendAboutImage } },
                             { label: "Delete Image", value: "DeleteImg", props: { deleteImage:deleteAboutImage} }
                         ]

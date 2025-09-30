@@ -5,7 +5,9 @@ import {
   CardContent,
   CardHeader,
   TextField,
-  Accordion, AccordionSummary, AccordionDetails
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MiniLoader from "@fuse/core/MiniLoader";
@@ -17,11 +19,21 @@ const AdminShowContent = ({ data }) => {
     <div className="mt-4">
       {data.id ? (
         <>
+          <h2 style={{ fontWeight: 600, marginTop: "1rem" }}>
+            Contact Button Link{" "}
+          </h2>
+          <TextField
+            fullWidth
+            value={data?.contactLink}
+            InputProps={{ readOnly: true }}
+          />
+          <h2 style={{ fontWeight: 600, marginTop: "1rem" }}>About Content</h2>
+
           <Card className="">
             <CardHeader>
               <h5 className="text-lg font-semibold">Content</h5>
               <p className="text-sm">
-                Your content is available in three different languages.
+                {/* Your content is available in three different languages. */}
               </p>
             </CardHeader>
             <CardContent className="space-y-2">
@@ -40,7 +52,7 @@ const AdminShowContent = ({ data }) => {
                 </AccordionDetails>
               </Accordion>
 
-              <Accordion>
+              {/* <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                   Russian
                 </AccordionSummary>
@@ -53,9 +65,9 @@ const AdminShowContent = ({ data }) => {
                     InputProps={{ readOnly: true }}
                   />
                 </AccordionDetails>
-              </Accordion>
+              </Accordion> */}
 
-              <Accordion>
+              {/* <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                   Azerbaijani
                 </AccordionSummary>
@@ -68,10 +80,11 @@ const AdminShowContent = ({ data }) => {
                     InputProps={{ readOnly: true }}
                   />
                 </AccordionDetails>
-              </Accordion>
+              </Accordion> */}
             </CardContent>
           </Card>
 
+          <h2 style={{ fontWeight: 600, marginTop: "1rem" }}>Image Section</h2>
           <Card className="mt-10">
             <CardHeader>
               <h5 className="text-lg font-semibold">Image</h5>
@@ -104,10 +117,7 @@ const AdminShowContent = ({ data }) => {
                     InputProps={{ readOnly: true }}
                   />
                   {image?.href?.url ? (
-                    <img
-                      src={image?.href?.url}
-                      alt="About Content"
-                    />
+                    <img src={image?.href?.url} alt="About Content" />
                   ) : (
                     "There is no image"
                   )}
@@ -141,8 +151,6 @@ const AdminShowContent = ({ data }) => {
               </Accordion>
             </CardContent>
           </Card>
-
-       
         </>
       ) : (
         <MiniLoader />
